@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1729163177 source:c:\users\nadam\downloads\open source\introduction to programming using c\day2\lab2\3-(no_of_days_in_month)\main.c
+	<stdio.h>
+	<stdlib.h>
+

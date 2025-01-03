@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1729426862 source:c:\users\nadam\downloads\open source\introduction to programming using c\day5\3-(struct_emp)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1729427100 source:c:\users\nadam\downloads\open source\introduction to programming using c\day5\lab5\3-(struct_emp)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

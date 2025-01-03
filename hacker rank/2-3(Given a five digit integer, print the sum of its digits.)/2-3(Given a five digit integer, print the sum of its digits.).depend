@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1730185967 source:c:\users\nadam\downloads\open source\introduction to programming using c\hacker rank\2-3(given a five digit integer, print the sum of its digits.)\main.c
+	<stdio.h>
+	<string.h>
+	<math.h>
+	<stdlib.h>
+

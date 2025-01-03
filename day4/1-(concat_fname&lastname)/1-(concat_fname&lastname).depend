@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1729280350 source:c:\users\nadam\downloads\open source\introduction to programming using c\day4\1-(concat_fname&lastname)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

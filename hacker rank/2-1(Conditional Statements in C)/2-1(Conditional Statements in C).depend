@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1730184828 source:c:\users\nadam\downloads\open source\introduction to programming using c\hacker rank\2-1(conditional statements in c)\main.c
+	<assert.h>
+	<limits.h>
+	<math.h>
+	<stdbool.h>
+	<stddef.h>
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

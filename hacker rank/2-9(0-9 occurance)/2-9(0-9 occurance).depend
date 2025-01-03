@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1730204868 source:c:\users\nadam\downloads\open source\introduction to programming using c\hacker rank\2-9(0-9 occurance)\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+

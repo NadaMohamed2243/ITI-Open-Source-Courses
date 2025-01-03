@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1729163686 source:c:\users\nadam\downloads\open source\day2\6-(factorial)\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1729184559 source:c:\users\nadam\downloads\open source\introduction to programming using c\day2\lab2\6-(factorial)\main.c
+	<stdio.h>
+	<stdlib.h>
+

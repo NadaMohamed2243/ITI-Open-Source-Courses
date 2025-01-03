@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1729508146 source:c:\users\nadam\downloads\open source\introduction to programming using c\day6\lab6\1-(factorial_function)\main.c
+	<stdio.h>
+	<stdlib.h>
+
