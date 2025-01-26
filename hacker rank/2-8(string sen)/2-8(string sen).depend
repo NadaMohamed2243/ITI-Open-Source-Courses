@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1730203568 source:c:\users\nadam\downloads\open source\introduction to programming using c\hacker rank\2-8(string sen)\main.c
-	<stdio.h>
-	<string.h>
-	<math.h>
-	<stdlib.h>
-

@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1729925202 source:c:\users\nadam\downloads\open source\introduction to programming using c\day7\lab7\3-(menu_emp-new-display(all_id_name)-exit)\main.c
-	<stdio.h>
-	<stdlib.h>
-	<windows.h>
-	<string.h>
-

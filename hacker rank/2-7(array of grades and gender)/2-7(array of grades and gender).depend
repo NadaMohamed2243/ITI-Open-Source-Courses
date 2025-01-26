@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1730201477 source:c:\users\nadam\downloads\open source\introduction to programming using c\hacker rank\2-7(array of grades and gender)\main.c
-	<stdio.h>
-	<string.h>
-	<math.h>
-	<stdlib.h>
-
