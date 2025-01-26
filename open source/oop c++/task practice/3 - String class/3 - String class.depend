@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1730929875 source:c:\users\nadam\downloads\open source\oop c++\task practice\3 - string class\main.cpp
+	<iostream>
+	<cstring>
+

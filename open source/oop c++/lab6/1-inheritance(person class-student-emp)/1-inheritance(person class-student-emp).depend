@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1731041244 source:c:\users\nadam\downloads\open source\oop c++\lab6\1-inheritance(person class-student-emp)\main.cpp
+	<iostream>
+	<string.h>
+
