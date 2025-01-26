@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT library (description, librarian, books)>
+<!ATTLIST library
+	location CDATA #IMPLIED
+	bookno CDATA #REQUIRED
+>
+
+<!ELEMENT description (#PCDATA)>
+
+<!ELEMENT librarian EMPTY>
+<!ATTLIST librarian
+	name CDATA #REQUIRED
+	phone CDATA #REQUIRED
+	gender (M | F) "F"
+>
+
+ <!ELEMENT books (book+)>
+
+<!ELEMENT book (preface, parts)>
+<!ATTLIST book
+	title CDATA #REQUIRED
+	ISBN ID #REQUIRED
+    Author CDATA #REQUIRED
+	partsno CDATA #REQUIRED
+>
+
+<!ELEMENT preface (#PCDATA)>
+
+<!ELEMENT parts (part+)>
+
+<!ELEMENT part (chapters)>
+<!ATTLIST part
+	title CDATA #IMPLIED
+	chapterno CDATA #REQUIRED
+	bookref IDREF #REQUIRED
+>
+
+
+<!ELEMENT chapters (chapter+)>
+
+<!ELEMENT chapter (summary, sections)>
+<!ATTLIST chapter
+	title CDATA #REQUIRED
+	sectionsno CDATA #REQUIRED
+>
+
+<!ELEMENT summary (#PCDATA)>
+
+
+<!ELEMENT sections (section+)>
+
+<!ELEMENT section (paragraphs)>
+<!ATTLIST section
+	paragraphno CDATA #REQUIRED
+>
+
+
+
+<!ELEMENT paragraphs (paragraph+)>
+
+<!ELEMENT paragraph (#PCDATA)>
+
+
+

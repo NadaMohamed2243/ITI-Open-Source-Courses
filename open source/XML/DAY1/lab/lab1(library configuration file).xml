@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library location="mansoura" bookno="1000">
+    <description><![CDATA[Abig library at the center of the city & has beatiful veiw]]></description>
+	<librarian name="nada" phone="01234" />
+	<books>
+		<book title="atomic habits" ISBN="1234" Author="james clear" partsno="10">
+			<preface><![CDATA[ 
+				Atomic Habits: 
+					An Easy & Proven Way to Build Good Habits
+					& Break Bad Ones.
+				This breakthrough book from James Clear is the most comprehensive 
+				guide on how to change your habits and get 1% better every day.
+			]]>
+			</preface>
+			<parts>
+				<part title="introduction" chapterno="30">
+					<chapters>
+						<chapter title="atomic habit ch 1" sectionsno="4">
+							<summary><![CDATA[ 
+								Atomic Habits c1: 
+									An Easy & Proven Way to Build Good Habits
+									& Break Bad Ones.
+								This breakthrough book from James Clear is the most comprehensive 
+								guide on how to change your habits and get 1% better every day.
+							    ]]>
+							</summary>
+							<sections>
+								<section paragraphno="3">
+									<paragraphs>
+										<paragraph>this is paragraph1</paragraph>
+									</paragraphs>
+								</section>
+							</sections>
+						</chapter>
+					</chapters>
+				</part>
+			</parts>
+		</book>
+	</books>
+</library>

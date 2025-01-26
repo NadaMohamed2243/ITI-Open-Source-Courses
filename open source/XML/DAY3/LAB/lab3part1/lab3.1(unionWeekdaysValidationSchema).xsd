@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="weekday">
+		<xs:simpleType>
+			<xs:union memberTypes="integerType stringType"/>       
+		</xs:simpleType>
+	</xs:element>
+	
+
+<xs:simpleType name="integerType">
+	<xs:restriction base="xs:integer">
+		<xs:minInclusive value="1"/>
+		 <xs:maxInclusive value="7"/>
+	</xs:restriction>
+</xs:simpleType>	
+	
+	
+
+<xs:simpleType name="stringType">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Saturday" />
+		<xs:enumeration value="Sunday" />
+		<xs:enumeration value="Monday" />
+		<xs:enumeration value="Tuesday" />
+		<xs:enumeration value="Wednesday" />
+		<xs:enumeration value="Thursday" />
+		<xs:enumeration value="Friday" />
+	</xs:restriction>
+</xs:simpleType>	
+	
+	
+	
+	
+</xs:schema>
+

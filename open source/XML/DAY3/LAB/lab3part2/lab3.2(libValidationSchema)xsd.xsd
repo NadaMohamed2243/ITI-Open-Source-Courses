@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="library">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="description" type="xs:string"/>
+
+                <xs:element name="librarian">
+                    <xs:complexType>
+              
+                            <xs:attribute name="name" type="xs:string" use="required"/>
+                            <xs:attribute name="phone" type="xs:integer" use="required"/>
+                            <xs:attribute name="gender" type="xs:string" use="optional" default="F">
+                            </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="books">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="book" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                    
+                                        <xs:element name="preface" type="xs:string"/>
+
+                                        <xs:element name="parts">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="part">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="chapters">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                        
+                                                                            <xs:element name="chapter">
+																				<xs:complexType>
+																					<xs:sequence>
+																						<xs:element name="summary" type="xs:string"/>
+																						<xs:element name="sections">
+																							<xs:complexType>
+																								<xs:sequence>
+																									<xs:element name="section">
+																										<xs:complexType>
+																											<xs:sequence> 
+																												<xs:element name="paragraphs">
+																													<xs:complexType>
+																														<xs:sequence>
+																														    <xs:element name="paragraph"/>
+																														</xs:sequence>
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																											<xs:attribute name="paragraphno" use="required">
+																												<xs:simpleType>
+																													<xs:restriction base="xs:integer">
+																														<xs:minInclusive value="1"/>
+																													</xs:restriction>
+																												</xs:simpleType>
+																											</xs:attribute>
+																										</xs:complexType>
+																									</xs:element>
+																								</xs:sequence>
+																							</xs:complexType>
+																						</xs:element>
+																					</xs:sequence>
+																					
+																					<xs:attribute name="title" use="required" type="xs:string"/>
+																					<xs:attribute name="sectionsno" use="required">
+																						<xs:simpleType>
+																							<xs:restriction base="xs:integer">
+																								<xs:minInclusive value="1"/>
+																							</xs:restriction>
+																						</xs:simpleType>
+																					</xs:attribute>
+																					
+																				</xs:complexType>
+                                                                            </xs:element>
+                                                                            
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="title" type="xs:string" use="required"/>
+                                                            <xs:attribute name="chapterno" use="required">
+                                                                <xs:simpleType>
+                                                                    <xs:restriction base="xs:integer">
+                                                                        <xs:minInclusive value="1"/>
+                                                                    </xs:restriction>
+                                                                </xs:simpleType>
+                                                            </xs:attribute>
+                                                            <xs:attribute name="bookref" type="xs:string" use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+
+                                    <xs:attribute name="title" use="required" type="xs:string"/>
+                                    <xs:attribute name="ISBN" use="required" type="xs:ID"/>
+                                    <xs:attribute name="Author" use="required" type="xs:string"/>
+                                    <xs:attribute name="partsno" use="required">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:integer">
+                                                <xs:minInclusive value="1"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+
+            <xs:attribute name="location" type="xs:string" use="required"/>
+            <xs:attribute name="bookno" type="xs:integer" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
