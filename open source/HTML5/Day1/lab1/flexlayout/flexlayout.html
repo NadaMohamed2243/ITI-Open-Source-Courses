@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title>iti branches</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            display: flex;
+            min-height: 10vh;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        ul>li {
+            list-style: none;
+        }
+
+        .itro {
+            height: 90vh;
+            background-image: url(images/hero_image.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .itro>h3 {
+            font-size: 2rem;
+            margin: 2rem 0;
+        }
+
+        .itro>button {
+            padding: 1.5rem 2rem;
+            border: none;
+            outline: none;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            background-image: linear-gradient(to left, transparent, rgb(28 60 183));
+        }
+
+        .itro>button:hover {
+            background-image: linear-gradient(to right,
+                    transparent,
+                    rgb(28 60 183));
+        }
+
+        .middlePanel {
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px;
+            gap: 10px;
+        }
+
+        .middlePanel>h1 {
+            color: red;
+            /* margin-bottom: 10px; */
+        }
+
+        .middlePanel>p {
+            color: rgb(0, 0, 0);
+            font-size: 1rem;
+        }
+
+        .map {
+            width: 50%;
+            /* width: 200px; */
+            height: 70vh;
+            /* background-image: url(./images/map.png); */
+            /* background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border:2px solid black; */
+            text-align: center;
+        }
+
+        .location>div>i {
+            margin-right: 2px;
+        }
+
+        .location>div {
+            min-width: 22vw;
+            height: 10vh;
+            padding: 10px 20px;
+            background-color: rgb(234, 232, 232);
+            flex-shrink: 0;
+        }
+
+        .location {
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            /* border:2px solid black; */
+        }
+
+        .itiLocations {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            gap: 5px;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+
+        .contact-us,
+        .follow-us {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        p i {
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff0000;
+        }
+
+        @media all and (orientation: portrait) {
+            .itiLocations {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .map {
+                width: 100%;
+            }
+
+            .location {
+                width: 100%;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .social-icons a {
+                margin-right: 10px;
+            }
+
+            /* .itiLocations .location .mainBranch{
+                background-color: red;
+            }
+
+            .itiLocations .location .Branch{
+                background-color: blue;
+            } */
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Admission</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Gallery</a></li>
+    </ul>
+    <div class="itro">
+        <h3>ITP And PTP Tracks</h3>
+        <button>Register</button>
+    </div>
+    <div class="middlePanel">
+        <h1>ITI Locations</h1>
+        <p>ITI main Locations all over the country</p>
+    </div>
+
+    <div class="itiLocations">
+        <div class="map">
+            <img src="/images/map.png" alt="" />
+        </div>
+        <div class="location">
+            <div class="mainBranch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Smart Village
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Alexandria
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Assuit
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Aswan
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Ismallia
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Mansoura
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Menofia
+            </div>
+            <div class="Branch">
+                <i class="fa-solid fa-location-dot"></i> ITI - Minya
+            </div>
+            <section>
+                <input type="checkbox" name="main branch" id="main branch" class="btncheckmain" />
+                <label for="main branch">main branch</label>
+            </section>
+            <section>
+                <input type="checkbox" name="mbranches" id="branches" class="btncheckbranch" />
+                <label for="branches">branches</label>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="contact-us">
+                <h3>CONTACT US</h3>
+                <p>
+                    <i class="fa-solid fa-location-dot"></i> 28 Km by Cairo / Alexandria
+                    Desert Road, 6 October, B148, Egypt
+                </p>
+                <p><i class="fa-solid fa-phone"></i> (+202) 353-55656</p>
+                <p><i class="fa-solid fa-envelope"></i> ITIinfo@iti.gov.eg</p>
+            </div>
+            <div class="follow-us">
+                <h3>FOLLOW US</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        mainbranchloc = document.querySelector(".mainBranch");
+        mainbranchbtn = document.querySelector(".btncheckmain");
+
+
+        
+        branchloc = document.querySelectorAll(".Branch");
+        branchbtn = document.querySelector(".btncheckbranch");
+
+        console.log(mainbranchloc);
+
+
+        mainbranchbtn.addEventListener("change", function (e) {
+            console.log(mainbranchbtn.checked);
+            if (mainbranchbtn.checked) {
+                mainbranchloc.style.color = "red";
+            } else {
+                mainbranchloc.style.color = "black";
+            }
+        });
+
+        branchbtn.addEventListener("change", function (e) {
+            console.log(branchbtn.checked);
+            if (branchbtn.checked) {
+                branchloc.forEach(element => {
+                    element.style.color = "blue";
+                });
+            } else {
+                branchloc.forEach(element => {
+                    element.style.color = "black";
+                });
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

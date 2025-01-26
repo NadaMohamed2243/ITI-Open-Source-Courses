@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            /* width: 100vw;
+            height: 100vh; */
+            display: grid;
+            /* gap: 10px; */
+            grid-template-rows: 1fr 11fr;
+            grid-template-columns: 1fr 4fr;
+            grid-template-areas:
+                " leftpart  navPart "
+                " leftpart  mainPart "
+                /* " leftpart  mainPart "
+                " leftpart  mainPart "; */
+        }
+
+        #navPart {
+            grid-area: navPart;
+        }
+
+        #mainPart {
+            grid-area: mainPart;
+        }
+
+        #leftpart {
+            grid-area: leftpart;
+        }
+
+
+        .nav>li>ul {
+            list-style: none;
+        }
+
+        .container>section.nav {
+            background-color: rgb(171, 140, 104);
+        }
+
+        .container .nav li {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            padding: 25px;
+            gap: 50px;
+            color: white;
+        }
+
+
+        .main {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-areas:
+                " img1 img2 img3 img4 "
+                " img5 img6 img7 img8 "
+                " img9 img10 img11 img12 ";
+        }
+
+        .main>img {
+            /* width: 250px;
+            height: 100px; */
+            width: 100%;
+            height: 100%;
+            transition: all 2s;
+
+        }
+
+        .main>img:hover {
+            transform: scale(1.1) skew(20deg);
+
+        }
+
+        #img1 {
+            grid-area: img1;
+        }
+
+        #img2 {
+            grid-area: img2;
+        }
+
+        #img3 {
+            grid-area: img3;
+        }
+
+        #img4 {
+            grid-area: img4;
+        }
+
+        #img5 {
+            grid-area: img5;
+        }
+
+        #img6 {
+            grid-area: img6;
+        }
+
+        #img7 {
+            grid-area: img7;
+        }
+
+        #img8 {
+            grid-area: img8;
+        }
+
+        #img9 {
+            grid-area: img9;
+        }
+
+        #img10 {
+            grid-area: img10;
+        }
+
+        #img11 {
+            grid-area: img11;
+        }
+
+        #img12 {
+            grid-area: img12;
+        }
+
+
+        .left {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .left>img {
+            width: 200px;
+            height: 100px;
+        }
+
+
+        .left li>ul {
+            list-style: none;
+        }
+
+        .left li ul {
+            list-style: none;
+        }
+
+        .left li#menu {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .left li#menu {
+            font-size: 20px;
+            color: gray;
+        }
+
+        .left li#icons {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+
+        }
+
+
+        .left li#icons ul {
+            font-size: 30px;
+            color: rgb(90, 78, 78);
+        }
+
+        .left .text {
+            text-align: start;
+            color: rgb(89, 81, 81);
+        }
+
+        .left .text h3 {
+            margin-bottom: 10px;
+            color: rgb(89, 81, 81);
+        }
+
+        .left .lower {
+            margin-top: 30px;
+            text-align: start;
+            color: rgb(89, 81, 81);
+        }
+
+        .left .lower section img {
+            width: 30%;
+
+
+        }
+
+        .left .lower section {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 1px;
+            flex-wrap: wrap;
+        }
+
+
+        @media screen and (orientation: portrait) {
+            .main {
+            grid-template-rows: repeat(1fr,12);
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                " img1 "
+                " img2 "
+                " img3 "
+                " img4 "
+                " img5 "
+                " img6 "
+                " img7 " 
+                " img8 "
+                " img9 " 
+                " img10 " 
+                " img11 " 
+                " img12 ";
+        }
+
+
+        .container {
+            grid-template-rows: 1fr 40fr;
+            grid-template-columns: 1fr 4fr;
+            grid-template-areas:
+                " leftpart  navPart "
+                " leftpart  mainPart "
+                /* " leftpart  mainPart "
+                " leftpart  mainPart "; */
+
+            /* overflow: hidden; */
+        }
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container">
+        <section class="nav" id="navPart">
+            <li>
+                <ul>
+                    All
+                </ul>
+                <ul>
+                    llistrate
+                </ul>
+                <ul>
+                    motion
+                </ul>
+                <ul>
+                    photograph
+                </ul>
+                <ul>
+                    print
+                </ul>
+            </li>
+        </section>
+        <section class="main" id="mainPart">
+            <img id="img1" src="img1.jpg" alt="">
+            <img id="img2" src="img2.jpg" alt="">
+            <img id="img3" src="img3.jpg" alt="">
+            <img id="img4" src="img4.jpg" alt="">
+            <img id="img5" src="img5.jpg" alt="">
+            <img id="img6" src="img1.jpg" alt="">
+            <img id="img7" src="img2.jpg" alt="">
+            <img id="img8" src="img3.jpg" alt="">
+            <img id="img9" src="img4.jpg" alt="">
+            <img id="img10" src="img5.jpg" alt="">
+            <img id="img11" src="img2.jpg" alt="">
+            <img id="img12" src="img3.jpg" alt="">
+        </section>
+        <section class="left" id="leftpart">
+            <img src="Screenshot 2025-01-24 150330.png" alt="">
+            <li id="menu">
+                <ul>
+                    Portofilo
+                </ul>
+                <ul>
+                    About us
+                </ul>
+                <ul>
+                    Blog
+                </ul>
+                <ul>
+                    Buy this Theme
+                </ul>
+            </li>
+
+
+            <li id="icons">
+                <ul>
+                    <i class="fa-solid fa-earth-americas"></i>
+                </ul>
+                <ul>
+                    <i class="fa-brands fa-twitter"></i>
+                </ul>
+                <ul>
+                    <i class="fa-brands fa-vimeo-v"></i>
+                </ul>
+            </li>
+
+
+            <section class="text">
+                <h3>A Text Widget</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore aspernatur magnam, voluptates
+                    similique distinctio</p>
+            </section>
+
+            <section class="lower">
+                <h3>Flickr</h3>
+                <section>
+                    <img src="img1.jpg" alt="">
+                    <img src="img2.jpg" alt="">
+                    <img src="img3.jpg" alt="">
+                    <img src="img4.jpg" alt="">
+                    <img src="img5.jpg" alt="">
+                    <img src="img1.jpg" alt="">
+                </section>
+            </section>
+        </section>
+    </section>
+</body>
+
+</html>

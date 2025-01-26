@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        section {
+            width: 200px;
+            height: 120px;
+            background-color: orange;
+            border: 2px solid rgb(0, 102, 255);
+            margin: 20px;
+            /* animation-name: sectionAnimation; */
+            /* animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-direction:normal;
+            transition: all 3s; */
+
+
+        }
+
+
+
+        .cont {
+            display: inline-block;
+        }
+
+        .cont:hover {
+            transition: transform 1s;
+            transform: scale(1.1);
+        }
+
+
+        section:hover {
+            animation-play-state: paused !important;
+            /* transition: transform 0.3s ease-in-out;
+            transform: scale(1.1) ; */
+        }
+
+        button {
+            width: 180px;
+            height: 60px;
+            background-color: rgb(0, 145, 255);
+            color: white;
+            margin: 20px;
+            border: none;
+        }
+
+        @keyframes sectionAnimation {
+            /* 0% {
+                background-color: orange;
+                transform: translate(0,0);
+            } */
+
+            25% {
+                background-color: rgb(0, 255, 94);
+                transform: translate(300px, 0);
+            }
+
+            50% {
+                background-color: rgb(0, 140, 255);
+                transform: translate(300px, 300px);
+            }
+
+            75% {
+                background-color: rgb(196, 199, 131);
+                transform: translate(0, 300px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="start">start</button>
+    <button class="stop">stop</button>
+    <div class="cont">
+        <section></section>
+    </div>
+
+
+    <script>
+        let btnStart = document.querySelector(".start");
+        let btnStop = document.querySelector(".stop");
+        let section = document.querySelector("section");
+
+        console.log(btnStart);
+        console.log(btnStop);
+        console.log(section);
+
+        btnStart.addEventListener("click", function () {
+            section.style.animationName = "sectionAnimation";
+            section.style.animationDuration = "5s"
+            section.style.animationIterationCount = "infinite";
+            section.style.animationDirection = "normal";
+            section.style.transition = "all 3s";
+            section.style.animationPlayState = "running"
+        });
+
+        btnStop.addEventListener("click", function () {
+            // if i want pause on stop button click
+            // section.style.AnimationPlayState="paused"
+
+            //return to the initial state and stop
+            section.style.animationName = "none";
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>
