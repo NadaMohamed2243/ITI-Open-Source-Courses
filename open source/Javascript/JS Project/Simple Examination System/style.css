@@ -1,0 +1,184 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9;
+}
+
+
+/* ------enter name --- */
+.nameEnter,
+#ExamSection,
+#timerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.nameEnter {
+    margin-top: 250px;
+}
+
+.startBtn {
+    width: 300px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(110, 43, 226);
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.startBtn:disabled {
+    border: none;
+    cursor: not-allowed;
+    background-color: rgb(155, 111, 231);
+}
+
+
+
+
+/* ----------------exam ----------*/
+#ExamSection {
+    margin-top: 30px;
+    border: 2px solid rgb(110, 43, 226);
+    border-radius: 20px;
+    width: 70%;
+}
+
+
+.progress {
+    display: block;
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    width: 70%;
+    background-color: rgb(110, 43, 226) !important;
+    transition: width 0.6s ease-in-out;
+}
+
+#ExamSection .questionContainer .questionTitle {
+    font-size: 33px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: rgb(75, 30, 154);
+    font-family: 'Playwrite CO Guides', sans-serif;
+}
+
+#ExamSection .questionContainer .questionImage {
+    border-radius: 20px;
+    width: 350px;
+    margin-bottom: 20px;
+}
+
+
+
+
+#ExamSection .questionContainer .questionAnswers .answer {
+    font-family: 'Playwrite CO Guides', sans-serif;
+    border-radius: 20px;
+    border: 2px solid rgb(216, 209, 240);
+    color: rgb(110, 43, 226);
+    width: 450px;
+    height: 37px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px rgb(216, 209, 240);
+}
+
+#ExamSection .questionContainer .questionAnswers .answer:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.05);
+}
+
+#ExamSection .questionContainer .questionAnswers .answer:active,
+#ExamSection .questionContainer .questionAnswers .answer.active {
+    background-color: rgb(179, 176, 180);
+    border: none;
+    color: rgb(75, 30, 154);
+}
+
+
+.nextBtn {
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 17px;
+    color: white;
+    background-color: rgb(110, 43, 226);
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.nextBtn:disabled {
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 17px;
+    color: white;
+    background-color: rgb(155, 111, 231);
+    border-radius: 20px;
+    border: none;
+    cursor: not-allowed;
+    margin-bottom: 20px;
+}
+
+
+/*---------- result -----------*/
+
+#timerContainer {
+    margin-top: 100px;
+    border-radius: 20px;
+    width: 70%;
+    border: 2px solid rgb(110, 43, 226);
+    padding: 30px;
+}
+
+#timerContainer h1{
+    font-size: 40px;
+    font-weight: bold;
+    color: rgb(110, 43, 226);
+}
+#progress-ring {
+    transform: rotate(-90deg);
+    position: relative;
+}
+
+#result {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(110, 43, 226);
+}
+
+.detaildsResult{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(155, 111, 231);
+}
+
+/* ------------------------------ */
+.hidden {
+    display: none !important;
+}
+
+
+
+
+

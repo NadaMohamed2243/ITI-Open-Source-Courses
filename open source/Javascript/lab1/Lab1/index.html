@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- if there is exception in scribt the other scripts will run normally -->
+    <!-- if this exception was because of variables which used in both scripts so the other will make exeption -->
+    <script>
+        console.log("---------------------------------------------");
+        console.log("------------------------------------------");
+        console.log("internal script before external one");
+        console.log("------------------------------------------");
+
+
+        //(in script before script contain variable) --> hosting(reading process) interprited (being scribt by scribt) 
+        // so even the defintion of number1 is not exist in global part of program
+        //external script don't make the reading process
+        //exeption 
+
+        // console.log("the value of number1(var) before script that contain it (before definition line)" , number1);
+        
+        
+        //hoisting(reading) is not done yet    
+        //exeption (number2) is not defined)
+        //console.log("the value of number2(let) before script that contain it (before definition line)" , number2);
+
+        //hoisting(reading) is not done yet    
+        //exeption (number3) is not defined)
+        //console.log("the value of number3(const) before script that contain it (before definition line)" , number3);
+
+
+        //hoisting(reading) is not done yet    
+        //exeption (number) is not defined
+        //console.log("the value of number4(without var) before script that contain it (before definition line)" , number4);
+
+        
+        
+
+    </script>
+    <script src="External.js"></script>
+    <script>
+        console.log("------------------------------------------------");
+        console.log("------------------------------------------");
+        console.log("internal script after external one");
+        console.log("------------------------------------------");
+        // the defintion of number1 is exist (because of the external script (above this script)) in global part of program
+        //it has the value not only the defintion 
+        // result --> 3
+        console.log("the value of number1(var) after script that contain it (after definition line)" , number1);  
+
+
+        //hoisting is done    
+        //result 2.9
+        console.log("the value of number2(let) after script that contain it (after definition line)" , number2);
+
+        //hoisting is done    
+        //result 255
+        console.log("the value of number3(const) after script that contain it (after definition line)" , number3);
+
+
+        //hoisting is done    
+        //result 3
+        console.log("the value of number4(without var) after script that contain it (after definition line)" , number4);
+
+    
+    </script>
+</head>
+<body>
+    <h1>first assignment</h1>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="external.js"></script>
+    <style>
+        .redDiv,.greenDiv,.blueDiv{
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            margin: 5px;
+        }
+        .blueDiv{
+            background-color: blue;
+        }
+        .greenDiv{
+            background-color: green;
+        }
+        .redDiv{
+            background-color: red;
+        }
+        .unclickable {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="parentClass">
+        <div class="redDiv"></div>
+        <div class="greenDiv"></div>
+        <div class="blueDiv"></div>
+    </div>
+</body>
+</html>
