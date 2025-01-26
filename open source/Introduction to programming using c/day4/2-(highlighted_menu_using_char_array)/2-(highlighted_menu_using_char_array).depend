@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1729284560 source:c:\users\nadam\downloads\open source\introduction to programming using c\day4\2-(highlighted_menu_using_char_array)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
