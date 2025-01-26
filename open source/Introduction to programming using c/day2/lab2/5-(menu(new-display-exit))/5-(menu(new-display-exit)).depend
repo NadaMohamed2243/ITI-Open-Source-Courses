@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1729163486 source:c:\users\nadam\downloads\open source\day2\5-(menu(new-display-exit))\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1729163486 source:c:\users\nadam\downloads\open source\introduction to programming using c\day2\lab2\5-(menu(new-display-exit))\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
