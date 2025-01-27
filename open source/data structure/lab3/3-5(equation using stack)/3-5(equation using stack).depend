@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1732193430 source:c:\users\nadam\downloads\open source\data structure\lab2\3-5(equation using stack)\main.cpp
+	<iostream>
+	<string.h>
+

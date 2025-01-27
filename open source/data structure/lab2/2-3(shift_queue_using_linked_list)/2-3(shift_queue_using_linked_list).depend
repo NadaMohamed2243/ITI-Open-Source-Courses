@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1732165852 source:c:\users\nadam\downloads\open source\data structure\lab2\2-3(shift_queue_using_linked_list)\main.cpp
+	<iostream>
+	<string.h>
+

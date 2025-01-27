@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1732191238 source:c:\users\nadam\downloads\open source\data structure\lab2\2-4(stack with linked list)\main.cpp
+	<iostream>
+	<string.h>
+

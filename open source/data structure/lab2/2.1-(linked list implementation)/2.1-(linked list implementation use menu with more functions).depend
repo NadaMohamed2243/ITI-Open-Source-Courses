@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1734836885 source:c:\users\nadam\downloads\open source\data structure\lab2\2.1-(linked list implementation use menu with more functions)\main.cpp
+	<iostream>
+	<string.h>
+	<windows.h>
+	<conio.h>
+

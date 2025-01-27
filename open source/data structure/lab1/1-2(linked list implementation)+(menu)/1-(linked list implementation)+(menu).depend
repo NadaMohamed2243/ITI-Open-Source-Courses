@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1731412083 source:c:\users\nadam\downloads\open source\data structure\1-(linked list implementation)+(menu)\main.cpp
+	<iostream>
+	<string.h>
+	<windows.h>
+	<conio.h>
+
+1731412083 source:c:\users\nadam\downloads\open source\data structure\lab1\1-(linked list implementation)+(menu)\main.cpp
+	<iostream>
+	<string.h>
+	<windows.h>
+	<conio.h>
+
+1731412083 source:c:\users\nadam\downloads\open source\data structure\lab1\1-2(linked list implementation)+(menu)\main.cpp
+	<iostream>
+	<string.h>
+	<windows.h>
+	<conio.h>
+
