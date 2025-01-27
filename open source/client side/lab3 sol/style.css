@@ -1,0 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: lightgray;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin: 0 100px;
+}
+
+ul li {
+    display: inline-block;
+    list-style: none;
+    padding: 20px;
+    color: rgb(75, 75, 75);
+    text-decoration: none;
+}
+
+ul li:hover {
+    cursor: pointer;
+}
+
+ul li a {
+    text-decoration: none;
+    color: rgb(75, 75, 75);
+}
+
+ul li:first-child {
+    /* margin-left: 70px; */
+    margin-right: 500px;
+    font-weight: bold;
+    color: black;
+}
+
+table {
+    margin-top: 40px;
+}
+
+table tr td h1 {
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.btn {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+}
+
+.shopbutton {
+    background-color: rgb(255, 119, 0);
+}
+
+.contactbutton {
+    background-color: rgb(0, 0, 0);
+    margin-left: 5px;
+}
+
+.shopbutton:hover,
+.contactbutton:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid black;
+}
+
+/* --------------------------- */
+
+.services,
+.freshfruits,
+.testimonial,
+.contactus {
+    margin-left: -100px;
+    margin-right: -100px;
+    margin-top: 90px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+    background-color: white;
+}
+
+.services h1,
+.freshfruits h1,
+.testimonial h1 {
+    margin-bottom: 10px;
+}
+
+.services p,
+.freshfruits p,
+.testimonial p {
+    margin-bottom: 60px;
+}
+
+.services table table {
+    width: 350px;
+    border: 2px solid rgba(145, 145, 145, 0.367);
+    padding: 20px;
+    height: 300px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.services .servicestable:hover {
+    border-top: 6px solid orange;
+}
+
+.services table {
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.services table table .fruitsname {
+    color: rgb(255, 119, 0);
+    font-size: 20px;
+}
+
+.services table table img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------- */
+
+.freshfruits,
+.testimonial,
+.contactus {
+    margin-top: 0px;
+}
+
+.freshfruits .freshfruitsheader {
+    font-weight: 200;
+    font-size: 30px;
+}
+
+.freshfruits table {
+    margin-right: 100px;
+    margin-left: 170px;
+    text-align: left;
+}
+
+.freshfruits .describtion {
+    width: 800px;
+    padding-right: 50px;
+}
+
+.freshfruits table td {
+    padding-bottom: 50px;
+}
+
+/* middlebanner */
+
+.middlebanner {
+    margin-right: -10px;
+    margin-left: -100px;
+    background-image: url(images/tasty.png);
+    width: 1440px;
+    height: 600px;
+    text-align: center;
+}
+
+.middlebanner h1 {
+    padding-top: 250px;
+    font-size: 100px;
+    text-transform: uppercase;
+    color: white;
+}
+
+/* testimonial */
+.testimonial img {
+    margin-top: 10px;
+}
+
+.testimonial h1 {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.testimonial p {
+    margin-right: 100px;
+    margin-left: 170px;
+}
+
+/* ----- contact us ---- */
+.contactus table {
+    margin-left: 100px;
+}
+
+.contactus table table {
+    margin-right: 460px;
+}
+
+.contactus h1 {
+    width: 200px;
+    font-size: 35px;
+}
+
+.contactus input {
+    width: 500px;
+    height: 30px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(56, 56, 56);
+}
+
+.contactus input :focus{
+    outline: none;
+}
+.contactus input :active {
+    outline: none;
+}
+
+.contactus .submitbtn {
+    width: 100px;
+    /* border-bottom: 1px solid rgb(0, 0, 0); */
+    margin-left: -400px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.contactus .emailinput {
+    margin-bottom: 60px;
+}
+
+/* --------footer-------- */
+.footer {
+    margin-left: -100px;
+    margin-right: -100px;
+    padding-bottom: 100px;
+    background-color: white;
+}
+
+.footer table {
+    margin: 0px 200px;
+}
+
+.footer table tr td {
+    width: 400px;
+}
+
+.footer table tr td {
+    font-size: 20px;
+}
+
+.footer .footerheader td {
+    padding-bottom: 20px;
+}
+
+.footer .footercomponent td {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.footer .iconssection td {
+    padding-right: 50px;
+}
+
+.footer table tr .Subscribeheader {
+    font-size: 20px;
+}
+
+.footer .footercomponent td input {
+    width: 250px;
+    height: 25px;
+}
+
+.footer .footercomponent td button {
+    width: 125px;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+/* copyright */
+.copyright {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
