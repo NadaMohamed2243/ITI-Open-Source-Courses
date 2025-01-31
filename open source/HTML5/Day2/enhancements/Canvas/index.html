@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            user-select: none;
+        }
+
+        #toolbar {
+            position: fixed;
+            top: 0;
+            background-color: rgb(173, 218, 230);
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            font-family: tahoma;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #radiusbar {
+            width: 200px;
+            padding: 10px;
+        }
+
+        .icredecre,
+        #radiusvalue,
+        #savebtn,
+        .shape-btn {
+            padding: 8px 7px;
+            border-radius: 50%;
+            box-shadow: red 5px 5px 10px inset, rgb(0, 204, 255) -5px -5px 10px inset;
+            margin-left: 10px;
+        }
+
+        .icredecre:hover,
+        #savebtn:hover {
+            cursor: pointer;
+            box-shadow: red -5px -5px 10px inset, rgb(0, 204, 255) 5px 5px 10px inset;
+        }
+
+        #savebar {
+            width: 300px;
+            margin-left: 30px;
+        }
+
+        #savebtn {
+            margin-left: 250px;
+        }
+
+        #colorsbar {
+            width: 600px;
+            margin-left: 50px;
+            padding: 10px;
+            /* display: flex;
+            flex-direction: row;
+            justify-content: space-between; */
+            display: -webkit-box;
+            -webkit-box-align: center;
+        }
+
+        .colors {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .active {
+            border: 2px solid white;
+        }
+
+
+        #shapebar {
+            margin-left: 2em;
+        }
+
+
+        .shape-btn.active {
+            border: 4px solid rgb(236, 222, 222);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="toolbar">
+        <div id="radiusbar">
+            <label>Radius</label>
+            <span id="radiusvalue">10</span>
+            <span id="incre" class="icredecre">+</span>
+            <span id="decre" class="icredecre">-</span>
+        </div>
+        <div id="savebar">
+            <span id="savebtn">Save</span>
+        </div>
+
+        <div id="colorsbar">
+
+        </div>
+
+        <div id="shapebar">
+            <button id="circlebtn" class="shape-btn active">⬤</button>
+            <button id="squarebtn" class="shape-btn">■</button>
+        </div>
+    </div>
+
+    </div>
+
+    <canvas id="mycanvas" style=" display:block; ">
+        Sorry, Update Your Browser and try again!
+    </canvas>
+
+
+    <script>
+
+        let mycanvas = document.getElementById('mycanvas');
+
+        let mycontext = mycanvas.getContext('2d');
+        mycanvas.width = window.innerWidth;
+        mycanvas.height = window.innerHeight;
+
+
+        let isdrawable = false;
+        let shape = 'circle';
+
+        mycanvas.addEventListener('mousemove', drawcircle);
+        mycanvas.addEventListener('mousedown', enabledrawing);
+        mycanvas.addEventListener('mouseup', disabledrawing);
+        function enabledrawing() {
+            isdrawable = true;
+        }
+        function disabledrawing() {
+            isdrawable = false;
+        }
+
+        function drawcircle(e) {
+
+            if (isdrawable) {
+                mycontext.beginPath();
+                if (shape === 'circle') {
+                    mycontext.arc(e.clientX, e.clientY, radius, 0, Math.PI * 2);
+                } else {
+                    mycontext.rect(e.clientX - radius, e.clientY - radius, radius * 2, radius * 2);
+                }
+                mycontext.fill();
+                mycontext.closePath();
+            }
+
+        }
+
+
+
+        let radius = 10;
+        incre = document.getElementById('incre');
+        decre = document.getElementById('decre');
+        radiusvalue = document.getElementById('radiusvalue');
+        incre.addEventListener('click', increaseradius);
+        decre.addEventListener('click', decreaseradius);
+
+        function increaseradius() {
+            radius++;
+            if (radius > 50) {
+                radius = 50;
+            }
+            radiusvalue.innerText = radius;
+        }
+
+        function decreaseradius() {
+            radius--;
+            if (radius < 10) {
+                radius = 10;
+            }
+            radiusvalue.innerText = radius;
+        }
+
+
+        let colorsbar = document.getElementById('colorsbar');
+        allcolors = ['red', 'blue', 'green', 'yellow', 'cyan', 'brown', 'gray', 'magenta', 'lightgreen', 'pink'];
+        for (let i = 0; i < allcolors.length; i++) {
+            let createddiv = document.createElement('div');
+            createddiv.style.backgroundColor = allcolors[i];
+            createddiv.addEventListener('click', changecolor);
+            createddiv.className = 'colors';
+            if (allcolors[i] == localStorage.getItem('selectedcolor')) {
+                createddiv.className += ' active';
+                mycontext.fillStyle = allcolors[i];
+            }
+            colorsbar.appendChild(createddiv);
+        }
+
+        let oldselectedcolor;
+
+        function changecolor(e) {
+            oldselectedcolor = document.getElementsByClassName('active')[0];
+            if (oldselectedcolor != null) { oldselectedcolor.className = 'colors'; }
+            e.target.className += ' active';
+            mycontext.fillStyle = e.target.style.backgroundColor;
+            localStorage.setItem('selectedcolor', e.target.style.backgroundColor);
+        }
+
+
+        document.getElementById('savebtn').addEventListener('click', function () {
+            let dataURL = mycanvas.toDataURL('image/png');
+
+            let downloadLink = document.createElement('a');
+            downloadLink.href = dataURL;
+            downloadLink.download = 'canvas_drawing.png';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+
+        document.getElementById('circlebtn').addEventListener('click', function () {
+            shape = 'circle';
+            document.getElementById('circlebtn').classList.add('active');
+            document.getElementById('squarebtn').classList.remove('active');
+        });
+
+        document.getElementById('squarebtn').addEventListener('click', function () {
+            shape = 'square';
+            document.getElementById('squarebtn').classList.add('active');
+            document.getElementById('circlebtn').classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>

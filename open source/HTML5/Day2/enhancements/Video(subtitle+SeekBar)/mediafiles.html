@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        section {
+            border: 2px solid black;
+            padding: 5px;
+        }
+
+        #mainwrapper {
+            display: flex;
+            margin: 10px auto;
+            width: 80vw;
+            height: 80vh;
+        }
+
+        #mainwrapper>section {
+            margin: 20px;
+        }
+
+        #controlswrapper {
+            width: 200px;
+        }
+
+        #videowrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        details {
+            font-weight: bold;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0.1rem;
+        }
+
+        details:nth-child(odd) {
+            background-color: lightgray;
+        }
+
+        details:nth-child(even) {
+            background-color: lightgreen;
+        }
+
+        input[type=button] {
+            width: 70px;
+            padding: 0.2rem;
+            border: none;
+            outline: none;
+            font-weight: bold;
+            border-radius: 0.5rem;
+        }
+
+        input[type=button]:focus {
+            background-color: pink;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            myvideo = this.document.getElementById('myvideo');
+            //--------------------------------------------------------------------------
+            //--------------------------------------------------------------------------
+            // Update seekbar as video plays
+            myvideo.addEventListener('timeupdate', function () {
+                let currentTimePercentage = (myvideo.currentTime / myvideo.duration) * 100;
+                document.getElementById('seekbar').value = currentTimePercentage;
+            });
+            //--------------------------------------------------------------------------
+            //--------------------------------------------------------------------------
+
+        });//end of load
+        function playpausefun(e) {
+            if (myvideo.paused) {
+                myvideo.play();
+                e.target.value = "Pause";
+            } else {
+                myvideo.pause();
+                e.target.value = "Play";
+            }
+        }
+        function changemediasize(e) {
+            switch (e.target.value) {
+                case "small":
+                    myvideo.width = myvideo.height = 350;
+                    break;
+                case "medium":
+                    myvideo.width = myvideo.height = 400;
+                    break;
+                case "large":
+                    myvideo.width = myvideo.height = 500;
+                    break;
+                case "fullscreen":
+                    myvideo.requestFullscreen();
+                    break;
+            }
+        }
+        function changemediavolume(e) {
+            myvideo.volume = e.target.value;
+        }
+        function changeseekbar(e) {
+            myvideo.currentTime = e.target.value * myvideo.duration / 100;
+        }
+        function Mutefun() {
+            //if (myvideo.muted) {
+            //    myvideo.muted = false;
+            //} else {
+            //    myvideo.muted = true;
+            //}
+            myvideo.muted ^= true;
+            //myvideo.muted=!
+
+        }
+        function Loopfun() {
+            if (myvideo.loop) {
+                myvideo.loop = false;
+            } else {
+                myvideo.loop = true;
+            }
+        }
+        function forwardfun() {
+            myvideo.playbackRate++;
+        }
+        function backwardfun() {
+            myvideo.playbackRate--;
+            if (myvideo.playbackRate <= 0) {
+                myvideo.playbackRate = 1;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <section id="mainwrapper">
+        <section id="controlswrapper">
+            <details>
+                <summary>Play | Pause</summary>
+                <input type="button" value="Play" onclick="playpausefun(event);" />
+            </details>
+            <details>
+                <summary>Media Size</summary>
+                <select onchange="changemediasize(event);">
+                    <option>Select Media Size</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="fullscreen">FullScreen</option>
+                </select>
+            </details>
+            <details>
+                <summary>Volume</summary>
+                <input type="range" min="0" max="1" step="0.1" value="0.5" onchange="changemediavolume(event);" />
+            </details>
+            <details>
+                <summary>SeekBar</summary>
+                <input type="range" min="0" max="100" step="any" value="0" id="seekbar"
+                    onchange="changeseekbar(event);" />
+            </details>
+            <details>
+                <summary>Mute | Loop</summary>
+                <input type="checkbox" onchange="Mutefun();" /> Mute <br />
+                <input type="checkbox" onchange="Loopfun();" /> Loop <br />
+
+            </details>
+            <details>
+                <summary> >> | <<< /summary>
+                        <input type="button" value=">>" onclick="forwardfun();" />
+                        <input type="button" value="<<" onclick="backwardfun();" />
+            </details>
+        </section>
+        <section id="videowrapper">
+            <video src="media/video1.mp4" id="myvideo" width="400" height="400">
+                <track src="media/subtitles.vtt" kind="subtitles" label="English" default>
+            </video>
+        </section>
+    </section>
+</body>
+
+</html>

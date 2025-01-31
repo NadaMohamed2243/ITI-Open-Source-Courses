@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    section,
+    aside,
+    .container {
+      padding: 5px;
+      border: 2px solid black;
+      border-radius: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto;
+      width: 80vw;
+      height: 80vh;
+      margin-top: 5%;
+      box-shadow: 5px 5px 50px rgba(160, 117, 56, 0.5) inset,
+        -5px -5px 50px rgb(160, 117, 56, 0.5) inset;
+    }
+
+    .container>section,
+    .container>aside {
+      margin: 40px;
+      box-shadow: 5px 5px 50px rgba(226, 170, 91, 0.5) inset,
+        -5px -5px 50px rgb(226, 170, 91, 0.5) inset;
+    }
+
+    .playlistContainer {
+      width: 200px;
+      height: 80%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .videowrapper {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80%;
+    }
+
+    .videoContainer {
+      width: 80%;
+      height: 80%;
+      border-radius: 20px;
+      overflow: hidden;
+      transform-origin: center;
+      transition: transform 2s ease;
+    }
+
+    .myvideo {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .videoContainer:hover {
+      transform: scale(1.263);
+    }
+
+    .playlist {
+      width: 80%;
+      height: 90%;
+      border-radius: 20px;
+      background-color: aqua;
+      overflow: hidden;
+      display: flex;
+      /* flex-direction: column; */
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      overflow: auto;
+      background-color: white;
+      transition: all 0.5s ease;
+      border: 1px solid rgba(66, 52, 34, 0.5);
+      box-shadow: 1px 1px 2px rgba(150, 119, 78) inset,
+        -1px -1px 2px rgba(134, 106, 69) inset;
+      padding: 20px 0;
+    }
+
+    .playlist::-webkit-scrollbar {
+      display: none;
+    }
+
+    .playlist:hover {
+      background-color: rgb(189, 123, 0);
+    }
+
+    .playlistvedio {
+      width: 80%;
+      border: 2px solid rgba(134, 124, 60);
+      box-shadow: 1px 1px 2px rgba(134, 124, 60, 0.9) inset,
+        -1px -1px 2px rgba(134, 124, 60) inset;
+      padding: 7px;
+      border-radius: 20px;
+      background-color: transparent;
+      transition: all 2s ease;
+      margin: 2px 0;
+      text-align: center;
+    }
+
+    .playlistvedio:hover {
+      background-color: white;
+      color: black;
+      transform: rotate(360deg);
+    }
+
+    .playlistvedio:active {
+      background-color: rgba(134, 124, 60, 0.9);
+      color: white;
+    }
+
+    .active {
+      background-color: rgba(134, 124, 60, 0.9) !important;
+      color: white !important;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <aside class="playlistContainer">
+      <div class="playlist">
+        <!-- add playlist in js  -->
+      </div>
+    </aside>
+    <section class="videowrapper">
+      <section class="videoContainer">
+        <video src="video/video1.mp4" class="myvideo" autoplay></video>
+      </section>
+    </section>
+  </main>
+  <script>
+    //-------------------------------------------
+    videos = [
+      {
+        name: "video1",
+        src: "video/video1.mp4"
+      },
+      {
+        name: "video2",
+        src: "video/video2.mp4"
+      },
+      {
+        name: "video3",
+        src: "video/video3.mp4"
+      },
+      {
+        name: "video4",
+        src: "video/video4.mp4"
+      },
+      {
+        name: "video5",
+        src: "video/video1.mp4"
+      },
+      {
+        name: "video6",
+        src: "video/video2.mp4"
+      },
+      {
+        name: "video6",
+        src: "video/video3.mp4"
+      },
+      {
+        name: "video7",
+        src: "video/video4.mp4"
+      },
+      {
+        name: "video8",
+        src: "video/video1.mp4"
+      },
+      {
+        name: "video9",
+        src: "video/video2.mp4"
+      },
+      {
+        name: "video10",
+        src: "video/video3.mp4"
+      },
+      {
+        name: "video11",
+        src: "video/video4.mp4"
+      },
+      {
+        name: "video12",
+        src: "video/video1.mp4"
+      },
+      {
+        name: "video13",
+        src: "video/video2.mp4"
+      },
+      {
+        name: "video14",
+        src: "video/video3.mp4"
+      },
+      {
+        name: "video15",
+        src: "video/video4.mp4"
+      }
+    ];
+
+    //if we want playlist merge with first video time add the current playing video here
+    let currentVideoIndex = 0;
+    // console.log(videos[0].src);
+
+    //-------------------------------------------
+    //-------------------------------------------
+
+    myvideo = document.querySelector(".myvideo");
+    playlist = document.querySelector(".playlist");
+
+    //-------------------------------------------
+    //-------------------------------------------
+
+    window.addEventListener("load", function () {
+      //-------------------------------------------
+      //-------------------------------------------
+      //add videos name to buttons
+      let playlistele;
+      videos.forEach((element, index) => {
+        playlistele = document.createElement("div");
+        playlistele.innerText = element.name;
+        playlistele.classList.add("playlistvedio");
+        playlist.appendChild(playlistele);
+
+        // Add click event to each video name in the playlist
+        playlistele.addEventListener("click", function (e) {
+          currentVideoIndex = index;
+          myvideo.src = element.src;
+          myvideo.play();
+          // Add active class to the clicked video
+          if (!myvideo.paused) {
+            // Remove active class from all other element
+            const allVideos = document.querySelectorAll(".playlistvedio");
+            allVideos.forEach((video) => video.classList.remove("active"));
+            e.target.classList.add("active");
+            console.log(playlistele.classList);
+
+          }
+        });
+      });
+
+
+
+      // Function to update the active class on the playlist
+      function updateActiveClass() {
+        const allVideos = document.querySelectorAll(".playlistvedio");
+
+        allVideos.forEach((video, i) => {
+          video.classList.remove("active");
+          if(i == currentVideoIndex)
+          {
+            video.classList.add("active");
+          }
+        });
+      }
+
+      //-------------------------------------------
+      //-------------------------------------------
+
+      // Handle keydown events for ArrowUp and ArrowDown
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowUp") {
+          // Play the previous video
+          if (currentVideoIndex > 0) {
+            currentVideoIndex--;
+            console.log(currentVideoIndex);
+            playVideoByIndex(currentVideoIndex);
+            updateActiveClass();
+          }
+        } else if (event.key === "ArrowDown") {
+          // Play the next video
+          if (currentVideoIndex < videos.length - 1) {
+            currentVideoIndex++;
+            console.log(currentVideoIndex);
+            playVideoByIndex(currentVideoIndex);
+            updateActiveClass();
+
+          }
+        }
+      });
+      // console.log(currentVideoIndex);
+      // Function to play a video by its index
+      function playVideoByIndex(index) {
+        myvideo.src = videos[index].src;
+        myvideo.play();
+      }
+
+
+      //-------------------------------------------
+      //-------------------------------------------
+      // console.log(myvideo);
+      // Autoplay the video when the page loads
+      // myvideo.play();
+
+
+      //-------------------------------------------
+
+      myvideo.addEventListener("click", function () {
+        if (myvideo.paused) {
+          myvideo.play();
+        } else {
+          myvideo.pause();
+        }
+      });
+
+      //-------------------------------------------
+
+      myvideo.addEventListener("dblclick", function () {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          myvideo.requestFullscreen();
+        }
+      });
+
+      //-------------------------------------------
+
+      // Handle play/pause inside fullscreen mode
+      document.addEventListener("fullscreenchange", function () {
+        myvideo.addEventListener("click", function () {
+          if (myvideo.paused) {
+            myvideo.play();
+          } else {
+            myvideo.pause();
+          }
+        });
+      });
+
+      // Play video on ArrowUp or ArrowDown key press
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+          if (myvideo.paused) {
+            myvideo.play();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

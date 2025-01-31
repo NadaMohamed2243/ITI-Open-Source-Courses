@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #container,
+        #container>section {
+            border: 2px solid black;
+            border-radius: 30px;
+        }
+
+        #container {
+            width: 80vw;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            padding: 20px;
+            box-shadow: 10px 10px 30px rgba(150, 119, 78) inset,
+                -10px -10px 30px rgba(134, 106, 69) inset;
+        }
+
+        #container>section {
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            box-shadow: 5px 5px 20px rgba(227, 207, 136, 0.5) inset,
+                -5px -5px 10px rgba(227, 207, 136, 0.5) inset;
+        }
+
+        #upperMainContainer {
+            width: 90%;
+            min-height: 10%;
+        }
+
+        img {
+            width: 130px;
+            height: 130px;
+            border-radius: 20px;
+            border: 5px solid rgb(169, 167, 36);
+            transition: all 2s ease;
+            cursor: grab;
+        }
+
+        img:hover {
+            transform: scale(1.5) rotate(360deg);
+        }
+
+        /* if the quantity = 0 --> the img be none clickable */
+        img[data-quantity="0"] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        #lowerContainer {
+            width: 90%;
+            min-height: 30vh;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #totalPrice {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .item {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            margin: 10px;
+        }
+
+        .quantity {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="container">
+        <section id="upperMainContainer">
+            <div class="item">
+                <img src="imgs/img1.png" alt="" data-quantity="5" data-price="10" />
+                <span class="quantity">5</span>
+            </div>
+            <div class="item">
+                <img src="imgs/img2.jpg" alt="" data-quantity="3" data-price="15" />
+                <span class="quantity">3</span>
+            </div>
+            <div class="item">
+                <img src="imgs/img3.jpg" alt="" data-quantity="7" data-price="20" />
+                <span class="quantity">7</span>
+            </div>
+            <div class="item">
+                <img src="imgs/img4.jpg" alt="" data-quantity="2" data-price="25" />
+                <span class="quantity">2</span>
+            </div>
+            <div class="item">
+                <img src="imgs/img5.jpg" alt="" data-quantity="4" data-price="30" />
+                <span class="quantity">4</span>
+            </div>
+            <div class="item">
+                <img src="imgs/img6.jpg" alt="" data-quantity="6" data-price="35" />
+                <span class="quantity">6</span>
+            </div>
+        </section>
+        <section id="lowerContainer"></section>
+    </section>
+
+    <script>
+        const upper = document.querySelector("#upperMainContainer");
+        const lower = document.querySelector("#lowerContainer");
+        const allimages = document.images;
+        let totalPrice = 0;
+        // Object resposable for track items in the lower container
+        const lowerItems = {};
+
+        window.addEventListener("load", function () {
+            let isDropped = false;
+
+            // upper container images
+            for (let i = 0; i < allimages.length; i++) {
+                allimages[i].addEventListener("dragstart", startDrag);
+                allimages[i].addEventListener("dragend", endDrag);
+            }
+
+            // lower container
+            lower.addEventListener("drop", dropped);
+            lower.addEventListener("dragenter", enterDrag);
+            lower.addEventListener("dragover", overDrag);
+            upper.addEventListener("dragleave", leaveDrag);
+
+            // upper container for returning items
+            upper.addEventListener("drop", returnItem);
+            upper.addEventListener("dragover", overDrag);
+        });
+
+        function startDrag(e) {
+            const img = e.target;
+            const quantity = parseInt(img.getAttribute('data-quantity'));
+            const price = parseInt(img.getAttribute('data-price'));
+
+            if (quantity > 0) {
+                e.dataTransfer.setData("src", img.src);
+                e.dataTransfer.setData("price", price);
+                isDropped = false;
+            } else {
+                e.preventDefault();
+            }
+        }
+
+        function endDrag(e) {
+            e.preventDefault();
+            if (isDropped) {
+                const img = e.target;
+                let quantity = parseInt(img.getAttribute('data-quantity'));
+                if (quantity > 0) {
+                    quantity -= 1;
+                    img.setAttribute('data-quantity', quantity);
+                    const quantityElement = img.parentElement.querySelector('.quantity');
+                    quantityElement.textContent = quantity;
+
+                    if (quantity === 0) {
+                        img.style.opacity = "0.5";
+                    }
+                }
+            }
+
+            if (upper.childElementCount == 0 && isDropped) {
+                upper.style.backgroundColor = "rgba(181, 161, 32, 0.40)";
+                upper.innerHTML = "EMPTY";
+            }
+
+            isDropped = false;
+        }
+
+        function dropped(e) {
+            e.preventDefault();
+            const src = e.dataTransfer.getData("src");
+            const price = parseInt(e.dataTransfer.getData("price"));
+
+            if (lowerItems[src]) {
+                // If the item already exists in the lower container--> increment its quantity
+                lowerItems[src].quantity += 1;
+                lowerItems[src].element.querySelector('.quantity').textContent = lowerItems[src].quantity;
+            } else {
+                // If the item does not exist--> add it to the lower container
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `
+                    <img src="${src}" alt="" data-quantity="1" data-price="${price}" />
+                    <span class="quantity">1</span>
+                `;
+                lower.appendChild(div);
+                lowerItems[src] = { element: div, quantity: 1 };
+
+                // Add listeners to the new item in the lower container
+                const newImg = div.querySelector('img');
+                newImg.addEventListener("dragstart", startDrag);
+                newImg.addEventListener("dragend", endDrag);
+            }
+
+            totalPrice += price;
+            updateTotalPrice();
+            isDropped = true;
+        }
+
+        function returnItem(e) {
+            e.preventDefault();
+            const src = e.dataTransfer.getData("src");
+            const price = parseInt(e.dataTransfer.getData("price"));
+
+            if (lowerItems[src]) {
+                // Decrement the quantity in the lower container
+                lowerItems[src].quantity -= 1;
+                const quantityElement = lowerItems[src].element.querySelector('.quantity');
+                quantityElement.textContent = lowerItems[src].quantity;
+
+                // If the quantity reaches zero--> remove the item from the lower container
+                if (lowerItems[src].quantity === 0) {
+                    lower.removeChild(lowerItems[src].element);
+                    delete lowerItems[src];
+                }
+
+
+                console.log(src);
+                console.log(src.split('/'));
+                //the img with this path --> http://127.0.0.1:5500/imgs/img3.jpg
+                // i want it inly imgs/img3.jpg
+                const filename = src.split('/').pop();
+                console.log(filename);
+                const upperImg = upper.querySelector(`img[src$="${filename}"]`);
+                console.log(upperImg);
+                if (upperImg) {
+                    let upperQuantity = parseInt(upperImg.getAttribute('data-quantity'));
+                    upperQuantity += 1;
+                    upperImg.setAttribute('data-quantity', upperQuantity);
+                    upperImg.parentElement.querySelector('.quantity').textContent = upperQuantity;
+                    upperImg.style.opacity = "1";
+                }
+                totalPrice -= price;
+                updateTotalPrice();
+            }
+        }
+
+        function enterDrag(e) {
+            e.preventDefault();
+            e.target.style.backgroundColor = "rgba(181, 161, 32, 0.40)";
+        }
+
+        function overDrag(e) {
+            e.preventDefault();
+        }
+
+        function leaveDrag(e) {
+            e.preventDefault();
+        }
+
+        function updateTotalPrice() {
+            let totalPriceElement = document.getElementById("totalPrice");
+            if (!totalPriceElement) {
+                totalPriceElement = document.createElement("div");
+                totalPriceElement.id = "totalPrice";
+                lower.appendChild(totalPriceElement);
+            }
+            totalPriceElement.textContent = `Total: $${totalPrice}`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLocation</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #container,
+        #container>section {
+            border: 2px solid black;
+            border-radius: 30px;
+        }
+
+        #container {
+            width: 80vw;
+            height: 90vh;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            box-shadow: 10px 10px 30px rgba(150, 119, 78) inset,
+                -10px -10px 30px rgba(134, 106, 69) inset;
+        }
+
+        #container>section {
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 10px;
+            box-shadow: 5px 5px 20px rgba(227, 207, 136, 0.5) inset,
+                -5px -5px 10px rgba(227, 207, 136, 0.5) inset;
+        }
+
+        #upperMainContainer {
+            width: 90%;
+            height: 20%;
+        }
+
+        img {
+            width: 140px;
+            height: 140px;
+            border-radius: 20px;
+            border: 5px solid rgb(169, 167, 36);
+            transition: all 2s ease;
+        }
+
+        img:hover {
+            transform: scale(1.5) rotate(360deg);
+        }
+
+        #lowerContainer {
+            width: 90%;
+            height: 70%;
+        }
+
+        button {
+            padding: 20px;
+            background-color: rgb(78, 77, 42);
+            color: white;
+            border-radius: 30px;
+            border: 1px solid rgb(78, 77, 42);
+            box-shadow: 7px 7px 15px rgba(227, 207, 136, 0.5) inset;
+            transition: all 0.6s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05) skew(20deg);
+            border: 2px solid rgba(78, 62, 2, 0.5);
+        }
+
+        .mymap {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: 2px solid rgb(124, 128, 0);
+            box-shadow: 7px 7px 15px rgba(227, 207, 136, 0.5);
+        }
+
+        .details {
+            width: 80%;
+            height: 90%;
+            border-radius: 30px;
+            background-color: rgba(227, 207, 136, 0.5);
+            border: 3px solid rgb(255, 170, 0);
+            box-shadow: 5px 5px 20px rgb(230, 155, 6) inset,
+                -5px -5px 10px rgb(230, 155, 6) inset;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .details:active {
+            background-color: rgb(210, 141, 2);
+            transform: scale(1.1);
+        }
+
+        .detailAdd {
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .detailValue {
+            width: 70%;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 10px;
+            border: 2px solid rgb(230, 155, 6);
+            justify-self: start;
+            background-color: blanchedalmond;
+            box-shadow: 1px 1px 2px rgb(230, 155, 6) inset;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="container">
+        <section id="upperMainContainer">
+            <button class="displayMapBtn">Display Map</button>
+            <button class="detailedInformationBtn">Detailed Information</button>
+        </section>
+        <section id="lowerContainer">
+            <!-- Map or Details will appear here -->
+        </section>
+    </section>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB90FxtYG_ybAYXGkz0ybkmkboE2nEbezI"></script>
+    <script>
+        displayMapBtn = document.querySelector(".displayMapBtn");
+        detailedInformationBtn = document.querySelector(".detailedInformationBtn");
+        lowerContainer = document.querySelector("#lowerContainer");
+
+        let mymap;
+        let details;
+        let lat, lon, accuracy, timestamp;
+
+        displayMapBtn.addEventListener("click", displayMap);
+        detailedInformationBtn.addEventListener("click", detailedInformation);
+
+        function displayMap() {
+            geoLocation(true);
+        }
+
+        function detailedInformation() {
+            geoLocation(false);
+        }
+
+        function geoLocation(isMapRequested) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+                        accuracy = position.coords.accuracy;
+                        timestamp = new Date(position.timestamp);
+
+                        if (isMapRequested) {
+                            // Create and display the map
+                            mymap = document.createElement("div");
+                            mymap.classList.add("mymap");
+                            lowerContainer.innerHTML = '';
+                            lowerContainer.appendChild(mymap);
+
+                            var location = new google.maps.LatLng(lat, lon);
+                            var specs = { zoom: 17, center: location };
+                            var map = new google.maps.Map(mymap, specs);
+
+                            //-----------------------------------------------------------------
+                            //-----------------------------------------------------------------
+                            new google.maps.Marker({
+                                position: location,
+                                map: map,
+                                title: "You are here"
+                            });
+                        } else {
+                            // Show detailed information
+                            lowerContainer.innerHTML = '';
+                            details = document.createElement("div");
+                            details.classList.add("details");
+                            lowerContainer.appendChild(details);
+
+                            const detailItems = [
+                                { label: "Latitude (degree)", value: lat },
+                                { label: "Longitude (degree)", value: lon },
+                                { label: "Accuracy (m)", value: accuracy },
+                                { label: "Timestamp (Current Time and Date)", value: timestamp }
+                            ];
+
+                            detailItems.forEach(item => {
+                                const detailDivAdd = document.createElement("div");
+                                detailDivAdd.classList.add("detailAdd");
+                                detailDivAdd.innerText = `${item.label}`;
+                                details.appendChild(detailDivAdd);
+
+                                const detailDivValue = document.createElement("div");
+                                detailDivValue.classList.add("detailValue");
+                                detailDivValue.innerText = `${item.value}`;
+                                details.appendChild(detailDivValue);
+
+                            });
+                        }
+                    },
+                    errorHandler
+                );
+            } else {
+                lowerContainer.innerHTML = "Please update your browser and try again!";
+            }
+        }
+
+        function errorHandler() {
+            alert("Error retrieving location.");
+        }
+    </script>
+</body>
+
+</html>

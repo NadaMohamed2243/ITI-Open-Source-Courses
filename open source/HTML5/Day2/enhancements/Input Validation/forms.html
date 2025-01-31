@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <form action="#">
+        <input type="text" placeholder="user name" class="userName" required />
+        <input type="submit" class="submitBtn" />
+    </form>
+
+    <script>
+        const userNameInput = document.querySelector('.userName');
+        const submitBtn = document.querySelector('.submitBtn');
+
+        // Set a custom validation message
+        submitBtn.addEventListener("click", inputValidation);
+
+        userNameInput.addEventListener("input", inputValidation);
+
+        function inputValidation(){
+            if (userNameInput.validity.valueMissing) {
+                userNameInput.setCustomValidity("You should input a user name");
+            } else {
+                userNameInput.setCustomValidity("");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
