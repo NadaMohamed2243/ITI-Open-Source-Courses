@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Notes 2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h4 id="boot-squence">Boot Squence</h4>
+<p>PowerON ----&gt; BIOS [Load from non-Volatile Memeory Run POST (Check HW)] ----&gt; Detect Devices ---&gt; Choose a Boot Device ---&gt; (GRUB)Bootloader [Menu Boot]---&gt; Kernel[Systemd/Init] --&gt; Systemd --&gt; Targets--&gt;Startup scripts</p>
+<pre><code>                                                    Power ON 
+                                                      ||
+                                                      \/
+                                                    BIOS/UEFI
+                            - BIOS/UEFI [Load from non-Volatile Memeory Run POST (Check HW)]
+                            - Detect Devices &amp;   Choose a Boot Devices [USB-HardDisk....] 
+                            - BIOS Load and Executes(Giving Control) MBR/UEFI  Bootlodaer  
+                                                      ||
+                                                      \/
+                            - MBR Master Boot Record [Bootloader Stage 1]
+                            - It is located in the 1st sector of the bootable disk. 
+                            - This has three components
+                              [ primary boot loader - Partition table - MBR validation check ]
+                            - It contains information about GRUB
+                            - MBR loads and executes the GRUB boot loader.
+                                                      ||
+                                                      \/
+                                    Boot Loader [GRUB2] [Bootloader Stage 2]
+                            - can also allow the user to select which kernel version or 
+                              operating system to boot if multiple options are available. 
+                              (Locate the operating System Kernel on the disk )
+                            - Read /etc/grub2.cfg &amp; Load the kernel into the Computer's Memory
+                            - Execute Kernel (Start Running the Kernel Code)
+                            - Load Supported Libraies 
+                                                      ||
+                                                      \/
+                                                    Kernel 
+                            - Load Device Drivers  &amp;  Intial Memory &amp; Mount File System 
+                            - Run Init Process /sbin/init or /etc/init or /bin/init
+                            After the kernel has initialized, it starts the init process 
+                            (traditionally /sbin/init) or /etc/systemd.
+                                                      |
+                                   Execute Systemd first Process in UserSpace 
+                                                      ||
+                                                      \/
+                                              Run .target Files 
+                                              - default.target 
+                                              - multi-user.target
+                               Basic.target       ssh.service        getty.target                                                     
+                                                      | 
+                                            Run .startup scripts 
+                                                      | 
+                                                  /systemd-logind 
+                                                  /etc/profile 
+                                                  ~/.bashrc 
+</code></pre>
+<img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F01911933-5a25-4dba-a57c-d9bd65680d84_1280x1664.gif">
+<img src="https://www.compmall.de/media/39/39/23/1667380599/BIOS-und-UEFI.jpg?ts=1683205938">
+<img src="https://www.easeus.com/images/en/screenshot/partition-manager/uefi-vs-bios.png" width=50% >
+<hr>
+<p>Systemd ----&gt; Service Manager</p>
+<p>systemd   : is a system and service manager for Linux operating systems.
+systemctl : is a command to introspect and control the state of the systemd system and service manager.
+Systemd ===&gt; Manager of Departments ===&gt;Collection of units</p>
+<h4 id="commands">Commands</h4>
+<h5 id="check-service-status">Check Service Status</h5>
+<pre><code>systemctl status service_name.service  (or) systemctl status service_name
+Example : 
+  systemctl status httpd
+      /usr/lib/systemd/system/httpd.service
+  pgrep -la sshd
+</code></pre>
+<h5 id="starting-or-stopping-a-service">Starting or Stopping a Service</h5>
+<pre><code>sudo systemctl start [serviceName]
+sudo systemctl stop [serviceName]
+</code></pre>
+<h5 id="enable-or-disable-a-service">Enable or Disable a Service</h5>
+<pre><code>sudo systemctl enable [serviceName]
+sudo systemctl disable [serviceName]
+sudo systemctl enable [serviceName] --now   # enable and Start 
+sudo systemctl disable [serviceName] --now  # disable and Stop
+</code></pre>
+<h5 id="check-if-a-particular-service-is-running">Check if a Particular Service is Running</h5>
+<pre><code>systemctl is-active [serviceName]
+systemctl is-active [sshd]
+</code></pre>
+<h5 id="check-if-a-particular-service-is-set-to-auto-start">Check if a Particular Service is Set to Auto Start</h5>
+<pre><code>systemctl is-enabled [serviceName]
+systemctl is-enabled [sshd]
+</code></pre>
+<h5 id="restart-or-reload-a-service">restart or reload a Service</h5>
+<pre><code>systemctl restart sshd ==&gt;change PID 
+systemctl reload sshd ==&gt;Not change PID 
+systemctl reload sshd #The service continues running, but its configuration is reloaded.
+#This would attempt to reload the SSH daemon's configuration without stopping the service
+ (useful for things like changing allowed ciphers).
+ 	
+systemctl restart sshd #The service is completely stopped and restarted.
+#This completely restarts the SSH service and would disconnect any active SSH sessions.
+</code></pre>
+<h5 id="mask--unmask-a-service">Mask &amp; unmask a Service</h5>
+<pre><code>sudo systemctl mask service_name #	Prevents the service from being started
+    Created symlink /etc/systemd/system/httpd.service---&gt; /dev/null
+sudo systemctl unmask service_name
+</code></pre>
+<h5 id="list-all-dependencies-of-a-service-eg-httpdservice">List All Dependencies of a Service (e.g., httpd.service)</h5>
+<pre><code>systemctl list-dependencies sshd
+systemctl list-dependencies sshd --before
+systemctl list-dependencies sshd --after
+--all: Show all units, including inactive ones.
+--before: List units that should be started before the given unit.
+--after: List units that should be started after the given unit.
+</code></pre>
+<h5 id="view-logs">View Logs</h5>
+<pre><code>sudo journalctl -u sshd
+</code></pre>
+<h5 id="configuration-files">Configuration Files</h5>
+<p>/usr/lib/systemd/system/ ===&gt; don't Edit Direct
+/etc/systemd/system</p>
+<h5 id="display-the-content-of-a-unit-file-in-systemd">display the content of a unit file in systemd.</h5>
+<p>systemctl cat sshd.service</p>
+<h5 id="dispalay-avialable-units-type">Dispalay Avialable units type</h5>
+<pre><code>systemctl -t help
+</code></pre>
+<h5 id="list-installed-units-currently-active">List installed Units Currently Active</h5>
+<pre><code>systemctl list-units
+sudo systemctl list-units --type=target
+sudo systemctl list-units -t target
+</code></pre>
+<h5 id="list-installed-units-currently-active--inactive">List installed Units Currently Active &amp; inactive</h5>
+<pre><code>systemctl list-units --all
+</code></pre>
+<h5 id="list-installed-services-only-currently-active--inactive">List installed Services Only Currently Active &amp; inactive</h5>
+<pre><code>systemctl list-units --all --type=service
+</code></pre>
+<h5 id="list-installed-units-currently-inactive">List installed Units Currently inactive</h5>
+<pre><code>systemctl list-units --all --state=inactive
+</code></pre>
+<h5 id="list-installed-units-with-state-enabledisablestatic">list installed units with state (enable,disable,static)</h5>
+<pre><code>systemctl list-unit-files
+systemctl list-unit-files --type=service
+systemctl list-unit-files --type=service | grep static
+</code></pre>
+<h5 id="list-dependencies-for-a-specific-unit">List Dependencies for a Specific Unit</h5>
+<pre><code>systemctl list-dependencies multi-user.target
+</code></pre>
+<h5 id="show-dependencies-for-the-default-target-multi-usertarget">Show Dependencies for the Default Target (multi-user.target)</h5>
+<pre><code>systemctl list-dependencies
+</code></pre>
+<h5 id="show-all-dependencies-including-inactive-units">Show All Dependencies Including Inactive Units</h5>
+<pre><code>systemctl list-dependencies --all
+</code></pre>
+<h5 id="reload-systemd-manager-configuration-files">Reload Systemd Manager Configuration Files</h5>
+<pre><code>systemctl daemon-reload
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loaded</td>
+<td>The unit file is parsed and available to systemd(Indicates that the unit file (e.g., for a service) has been</td>
+</tr>
+<tr>
+<td>Inactive</td>
+<td>The service is not currently running.</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>The service is currently running.</td>
+</tr>
+<tr>
+<td>Enabled</td>
+<td>The service is set to start automatically at boot.</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>The service is not set to start automatically at boot.</td>
+</tr>
+<tr>
+<td>Mask</td>
+<td>Prevents the service from being started by any means, even manually.</td>
+</tr>
+<tr>
+<td>Unmask</td>
+<td>Reverses masking, allowing the service to be started again.</td>
+</tr>
+<tr>
+<td>Static</td>
+<td>Checks if a service is static (i.e., cannot be enabled or disabled).</td>
+</tr>
+</tbody>
+</table>
+<table>
+  <tr>
+    <th></th>
+    <th>Static</th>
+    <th>Enabled</th>
+    <th>Disabled</th>
+  </tr>
+  <tr>
+    <td>Startup Behavior</td>
+    <td>
+        Cannot start on its own; triggered by dependencies.
+        Must be started manually or used as part of another service's dependency chain.
+    </td>
+    <td> Starts automatically at boot.</td>
+    <td>Does not start at boot; must be started manually.</td>
+  </tr>
+  <tr>
+    <td>Usage</td>
+    <td>Foundational or helper services not meant to run directly.	</td>
+    <td> For services you want running persistently.	</td>
+    <td>For on-demand or optional services.</td>
+  </tr>
+    <tr>
+    <td>Can Be Enabled/Disabled?</td>
+    <td>No. it cannot be enabled or disabled <p>Because</p> They don't have an [Install] section in their unit files. <p>([Install] section missing..)</p></td>
+    <td>Yes.</td>
+    <td>Yes.</td>
+  </tr>
+  <tr>
+        <td> Common Services</td>     
+        <td> 
+           <p style="font-weight: bold;" >systemd-udevd.service:</p>
+            <p>Handles device management and hardware events.</p>
+            <p>Runs as part of the boot process.</p>
+           <p style="font-weight: bold;" >systemd-journald.service:</p>
+           <p>Responsible for logging system events.</p>
+      </td> 
+      <td> </td>
+        <td> </td>
+  </tr>
+</table>
+<hr>
+<h3 id="systemd-targets">Systemd Targets</h3>
+<ul>
+<li>Systemd has more than one target {Mode ?? GUI or Server without GUI}
+<ul>
+<li>reboot.target</li>
+<li>poweroff.target</li>
+<li>multi-user.target ==&gt; Server without GUI ==&gt;TTY</li>
+<li>Graphical.target ==&gt; GUI</li>
+<li>recuse.target ==&gt; Maintance OS ==&gt; One User Login (root)
+[Basics Services (NetworkService Not Working ) , Can mount HardDisk]</li>
+<li>Emergecy.target ==&gt; Big Problems  ==&gt; Systemctl only</li>
+</ul>
+</li>
+</ul>
+<h5 id="view-the-current-target">View the current target:</h5>
+<pre><code>systemctl get-default
+</code></pre>
+<h5 id="change-the-default-target">Change the default target:</h5>
+<pre><code>sudo systemctl set-default multi-user.target
+</code></pre>
+<h5 id="switch-to-a-different-target-you-can-switch-to-a-different-target-at-runtime">Switch to a different target: You can switch to a different target at runtime:</h5>
+<pre><code>sudo systemctl isolate graphical.target
+</code></pre>
+<h5 id="list-all-available-targets">List all available targets:</h5>
+<pre><code>systemctl list-units --type=target
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Description</th>
+<th>Equivalent to</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reboot.target</td>
+<td>Reboots the system.</td>
+<td>reboot command</td>
+<td>Use when you want to reboot the system.</td>
+</tr>
+<tr>
+<td>poweroff.target</td>
+<td>Powers off the system.</td>
+<td>poweroff command</td>
+<td>Use when you want to shut down the system.</td>
+</tr>
+<tr>
+<td>multi-user.target</td>
+<td>Multi-user mode without graphical interface (similar to runlevel 3).</td>
+<td>Runlevel 3</td>
+<td>Use for server or non-GUI environments where you need networking and multiple users.</td>
+</tr>
+<tr>
+<td>rescue.target</td>
+<td>Rescue mode for system repairs or troubleshooting, with</td>
+<td>minimal services.</td>
+<td>Single-user mode with basic services.</td>
+</tr>
+<tr>
+<td>emergency.target</td>
+<td>Emergency mode with the most minimal environment, only the root filesystem in read-only mode.</td>
+<td>Emergency shell</td>
+<td>Use for extreme troubleshooting when other modes don’t work, e.g., when the filesystem is damaged.</td>
+</tr>
+</tbody>
+</table>
+<p>=====================================================================================================</p>
+<h4 id="structure-of-unit-files-in">Structure of Unit Files in</h4>
+<pre class="hljs"><code><div>[Unit]
+Description=Apache HTTP Server
+Documentation=man:httpd(8)
+
+[Service]
+ExecStart=/usr/sbin/httpd -D FOREGROUND
+ExecReload=/bin/<span class="hljs-built_in">kill</span> -HUP <span class="hljs-variable">$MAINPID</span>
+PIDFile=/run/httpd/httpd.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+</div></code></pre>
+<h5 id="example-creating-a-simple-python-script-service">Example: Creating a Simple Python Script Service</h5>
+<ol>
+<li>Create a simple Python script:
+touch ~/.test/first.sh
+chmod u+x ~/.test/first.sh</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-meta">#! /usr/bin/bash</span>
+  <span class="hljs-comment"># /home/mina/.test/first.sh</span>
+<span class="hljs-built_in">typeset</span> -i x=0
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span> ;
+<span class="hljs-keyword">do</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello Mina <span class="hljs-variable">$x</span>"</span>
+        date &gt;&gt; ~/.<span class="hljs-built_in">test</span>/ouput
+        ((x++))
+        sleep 10
+<span class="hljs-keyword">done</span>
+
+</div></code></pre>
+<ol>
+<li>Create the systemd service file( Create a service file in /etc/systemd/system/ ):</li>
+</ol>
+<pre class="hljs"><code><div>    sudo nano /etc/systemd/system/my_first_service.service
+</div></code></pre>
+<ol start="3">
+<li>Add the following content:</li>
+</ol>
+<pre class="hljs"><code><div>[Unit]
+Description=My first Script Service
+After=network.target
+
+[Service]
+ExecStart=/home/mina/.<span class="hljs-built_in">test</span>/first.sh
+Restart=always
+User=your_user_name
+Group=your_group_name
+
+[Install]
+WantedBy=multi-user.target
+</div></code></pre>
+<ol start="4">
+<li>Reload systemd:</li>
+</ol>
+<pre class="hljs"><code><div>  sudo systemctl daemon-reload
+</div></code></pre>
+<ol start="5">
+<li>Enable and Start the Service:</li>
+</ol>
+<pre class="hljs"><code><div>  sudo systemctl <span class="hljs-built_in">enable</span> my_first_service.service
+  sudo systemctl start my_first_service.service
+</div></code></pre>
+<ol start="6">
+<li>Check the status:</li>
+</ol>
+<pre class="hljs"><code><div>sudo systemctl status my_first_service.service
+</div></code></pre>
+<ol start="7">
+<li>check Output</li>
+</ol>
+<pre class="hljs"><code><div>tail -f ~/.<span class="hljs-built_in">test</span>/ouput 
+</div></code></pre>
+<h2 id="scheduling-tasks-in-linux">Scheduling tasks in Linux</h2>
+<h4 id="schedule-a-one-time-task-at-a-specific-time-using-at-command">schedule a one-time task at a specific time using 'at' command</h4>
+<p>The at command in Linux is used to schedule tasks for one-time execution at a specific time in the future.
+Unlike cron, which is used for recurring tasks, at is ideal for ad hoc or single-use jobs.</p>
+<h5 id="ensure-at-is-installed">Ensure at is Installed</h5>
+<pre class="hljs"><code><div>    sudo apt install at       <span class="hljs-comment"># Debian/Ubuntu</span>
+    sudo yum install at       <span class="hljs-comment"># Red Hat/CentOS</span>
+    sudo zypper install at    <span class="hljs-comment"># openSUSE</span>
+</div></code></pre>
+<h5 id="enable-the-atd-daemon">Enable the atd Daemon</h5>
+<ul>
+<li>The at command relies on the atd daemon to execute tasks.Start and enable it:<pre class="hljs"><code><div>sudo systemctl start atd
+sudo systemctl <span class="hljs-built_in">enable</span> atd
+</div></code></pre>
+</li>
+</ul>
+<h5 id="basic-syntax-of-at">Basic Syntax of at</h5>
+<pre class="hljs"><code><div>at [TIME]
+TIME can be specified <span class="hljs-keyword">in</span> various formats:
+HH:MM (24-hour format, e.g., 14:30 <span class="hljs-keyword">for</span> 2:30 PM).
+now + 1 hour (relative time).
+midnight, noon, teatime (4:00 PM).
+Specific date and time, e.g., 8:00 AM tomorrow, 10:30 PM July 27.
+
+Example 
+at now+5min
+at teatime tomorrow 
+at noon+4days
+at 5pm august 3 2021
+</div></code></pre>
+<h5 id="schedule-a-command">Schedule a Command</h5>
+<pre class="hljs"><code><div>  at 15:00 &lt;&lt;EOF
+  at&lt; <span class="hljs-built_in">echo</span> <span class="hljs-string">"Starting maintenance"</span>
+  at&lt; sudo systemctl restart apache2
+  at&lt; <span class="hljs-built_in">echo</span> <span class="hljs-string">"Maintenance completed"</span>
+  EOF <span class="hljs-comment">#Cntrl+D</span>
+</div></code></pre>
+<h6 id="mehod-2-using-pipline">Mehod 2 using pipline</h6>
+<pre class="hljs"><code><div>  <span class="hljs-built_in">echo</span> <span class="hljs-string">"command_to_run"</span> | at 14:30
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">"echo 'Backup completed' &gt;&gt; /var/log/backup.log"</span> | at 18:00
+</div></code></pre>
+<h6 id="mehod-3-using-redirection">Mehod 3 using Redirection</h6>
+<pre class="hljs"><code><div>  chmod u+x /tmp/backup/test.sh 
+  at now &lt; /tmp/backup/test.sh 
+</div></code></pre>
+<h6 id="mehod-4-using-a-heredoc-block">Mehod 4 Using a heredoc Block</h6>
+<pre class="hljs"><code><div>  at 00:00 &lt;&lt;END
+  at&lt; <span class="hljs-built_in">echo</span> <span class="hljs-string">"Starting maintenance"</span>
+  &lt;END
+</div></code></pre>
+<h5 id="viewing-scheduled-tasks-list-all-scheduled-tasks-for-the-current-useratq-or-at--l">Viewing Scheduled Tasks List all scheduled tasks for the current user:(atq or at -l)</h5>
+<pre class="hljs"><code><div>  atq  <span class="hljs-comment">#or at -l </span>
+      <span class="hljs-comment">#1    Tue Jan 30 14:30:00 2025 a user</span>
+      <span class="hljs-comment">#2    Tue Jan 30 18:00:00 2025 a user</span>
+
+  watch atq <span class="hljs-comment">#List all scheduled task in RunTime</span>
+
+
+</div></code></pre>
+<h5 id="displaying-the-content-of-a-scheduled-job">Displaying the Content of a Scheduled Job</h5>
+<pre class="hljs"><code><div>  ls /var/spool/at/ <span class="hljs-comment">#hold the Jobs Script Files</span>
+  at -c [JOB_ID]
+
+  sudo ls /var/spool/at/
+    <span class="hljs-comment">#a0001b01ba50a2	spool</span>
+  sudo cat /var/spool/at/a0001b01ba50a2
+  <span class="hljs-comment">#OR at -c [jobID]</span>
+  atq
+     <span class="hljs-comment">#27	Tue Feb 11 07:54:00 2025 a mina</span>
+  at -c 27 
+
+</div></code></pre>
+<h5 id="removing-scheduled-tasks-atrm-jobid-or-at--r-jobid">Removing Scheduled Tasks (atrm [jobID] or at -r [jobID])</h5>
+<pre class="hljs"><code><div><span class="hljs-comment">#Use the job ID from atq to remove a scheduled task:</span>
+  <span class="hljs-comment"># atrm [JOB_ID] or at -r [JOB_ID] </span>
+  atrm 1
+</div></code></pre>
+<h5 id="controlling-access">Controlling Access</h5>
+<p>ls /etc/at.*</p>
+<ul>
+<li>The /etc/at.allow and /etc/at.deny files control which users can use the at command:
+<ul>
+<li>/etc/at.allow: Users listed here can use at.</li>
+<li>/etc/at.deny: Users listed here cannot use at. (By default created)</li>
+<li>If /etc/at.allow exists, only users listed in it can use at, and /etc/at.deny is ignored.</li>
+<li>If /etc/at.allow does not exist but /etc/at.deny does, all users can use at except those listed in /etc/at.deny.</li>
+<li>If both files not exists is mean all users are denied, only root can use the at command.</li>
+</ul>
+</li>
+</ul>
+<p>cat /etc/passwd | grep bash | cut -d : -f 1 &gt;&gt; /etc/at.deny
+echo mina &gt;/etc/at.deny</p>
+<h5 id="example">Example</h5>
+<p>Schedule a System Shutdown
+echo &quot;sudo shutdown -h now&quot; | at midnight
+Backup Directory at Specific Time
+echo &quot;tar -czf /backup/$(date +%F).tar.gz /important/data&quot; | at 3:00 AM tomorrow</p>
+<p>===================================================================================</p>
+<h4 id="cron-scheduling">Cron Scheduling</h4>
+<p>Crontab stands for &quot;cron table,&quot; which is a file where cron jobs are defined.
+The cron daemon (crond) reads the crontab file and executes the scheduled tasks.</p>
+<pre class="hljs"><code><div>  sudo yum install  cronie-noanacron.x86_64 
+</div></code></pre>
+<pre class="hljs"><code><div>cat /etc/crontab 
+  * * * * * /path/to/<span class="hljs-built_in">command</span>
+  - - - - -
+  | | | | |
+  | | | | +---- Day of the week (0-7, Sunday is both 0 and 7)
+  | | | +------ Month (1-12)
+  | | +-------- Day of the month (1-31)
+  | +---------- Hour (0-23)
+  +------------ Minute (0-59)
+
+Example : Schedule a task to run at 9:00 a.m. from Monday to Friday 
+          0 9 * * 1-5 /path/to/your/<span class="hljs-built_in">command</span>
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Minute</th>
+<th>Hour</th>
+<th>Day</th>
+<th>Month</th>
+<th>week</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>8</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>0,30</td>
+<td>9</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>30</td>
+<td>8-18</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>*/5</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>12</td>
+<td>13</td>
+<td>1</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>49</td>
+<td>23</td>
+<td>16</td>
+<td>9</td>
+<td>*</td>
+</tr>
+<tr>
+<td>0</td>
+<td>15</td>
+<td>*</td>
+<td>*</td>
+<td>1</td>
+</tr>
+<tr>
+<td>32</td>
+<td>14</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 12 * * *</td>
+<td>Run at noon (12:00) every day</td>
+</tr>
+<tr>
+<td>0/15 * * * *</td>
+<td>Run every 15 minutes every day</td>
+</tr>
+<tr>
+<td>1/2  * * * *</td>
+<td>Run every odd minute</td>
+</tr>
+<tr>
+<td>0/5 13,18 * * *</td>
+<td>Run every five minutes, starting at 13:00 and ending at 13:55, and then starting at 18:00 and ending at 18:55, every day</td>
+</tr>
+<tr>
+<td>0-5 13 * * *</td>
+<td>Run every minute starting at 13:00. and ending at 13:05 every day</td>
+</tr>
+<tr>
+<td>15,45 13 *  6 Tue</td>
+<td>Run at 13:15 and 13:45 every Tuesday in June</td>
+</tr>
+<tr>
+<td>30 9 * *  MON-FRI</td>
+<td>Run at 09:30 every Monday, Tuesday, Wednesday, Thursday and Friday</td>
+</tr>
+<tr>
+<td>30 9 15 * * *</td>
+<td>Run at 09:30 on the 15th day of every month</td>
+</tr>
+<tr>
+<td>0 18 L * * *</td>
+<td>Run at 18:00 on the last day of every month</td>
+</tr>
+<tr>
+<td>0 18 L-3 * *</td>
+<td>Run at 18:00 on the third to last day of every month</td>
+</tr>
+<tr>
+<td>30 10 * * 5L</td>
+<td>Run at 10:30 on the last Thursday of every month</td>
+</tr>
+<tr>
+<td>0 10 * *  2#3</td>
+<td>Run at 10:00 on the third Monday of every month</td>
+</tr>
+<tr>
+<td>0 0 10/5 * *</td>
+<td>Run at 00:00 on every 5th day, starting from the 10th until the end of the month</td>
+</tr>
+</tbody>
+</table>
+<h5 id="copy-of-all-the-current-jobs">copy of all the current jobs</h5>
+<pre class="hljs"><code><div>  crontab -l &gt; crontab_new 
+  crontab crontab_new
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Description</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>For every time unit</td>
+<td>‘*’ in the <minute> field means “for every minute”</td>
+</tr>
+<tr>
+<td>?</td>
+<td>Used in the <day-of-month> and <day-of-week> fields to denote the arbitrary value and thus neglect the field value.</td>
+<td>‘?’ in the <day-of-week> field means “any week day”</td>
+</tr>
+<tr>
+<td>–</td>
+<td>Determines the value range</td>
+<td>10-15 in the <hour> field means “between 10th and 15th hours”</td>
+</tr>
+<tr>
+<td>,</td>
+<td>Specifies multiple values</td>
+<td>“MON, WED, FRI” in <day-of-week> field means on the days “Monday, Wednesday and Friday.”</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Defines the incremental values</td>
+<td>“5/15” in the <minute> field means “5, 20, 35, and 50 minutes of an hour.”</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Used in the <day-of-month> and <day-of-week> fields, indicates the last day of the month or the last occurrence of the specified weekday in a month. Also, ‘L’ supports an offset value.</td>
+<td>‘L’ in <day-of-month> – the last day of the month, regardless of the month length, such as January 31, February 28 or 29<br>“L-3” in <day-of-month> – The third to last day of the calendar month“<br>5L” in <day-of-week> – The last Friday of the month</td>
+</tr>
+<tr>
+<td>#</td>
+<td>Specifies the “N-th” occurrence of a weekday of the month, format: DAY_OF_THE_WEEK#OCCURRENCE_NUMBER</td>
+<td>“5#3” in <day-of-week> – The third Friday of the month“1#2” in <day-of-week> – The second Monday of the mont</td>
+</tr>
+</tbody>
+</table>
+<p>Cron Special Strings
+In addition to the fields specified in the cron expression, there’s also support for some special, predefined values that we can use instead of the fields:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@reboot</td>
+<td>run once at system startup</td>
+<td></td>
+</tr>
+<tr>
+<td>@yearly or @annualy</td>
+<td>run once a year</td>
+<td>Equivaltent to  0 0 1 1 *</td>
+</tr>
+<tr>
+<td>@monthly</td>
+<td>run once a month</td>
+<td>Equivaltent to  0 0 1 * *</td>
+</tr>
+<tr>
+<td>@weekly</td>
+<td>run once a week</td>
+<td>Equivaltent to  0 0 * * 0</td>
+</tr>
+<tr>
+<td>@daily or @midnight</td>
+<td>run once a day</td>
+<td>Equivaltent to   0 0 * * *</td>
+</tr>
+<tr>
+<td>@hourly</td>
+<td>run hourly</td>
+<td>Equivaltent to  0 * * * *</td>
+</tr>
+</tbody>
+</table>
+<p>Example :
+@daily /usr/bin/backup-database.sh</p>
+<table>
+<thead>
+<tr>
+<th>File/Directory</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/cron.d</td>
+<td>System-wide cron jobs for packages or administrators.</td>
+</tr>
+<tr>
+<td>/etc/cron.deny</td>
+<td>Users denied cron access.</td>
+</tr>
+<tr>
+<td>/etc/cron.allow</td>
+<td>Users allowed cron access.</td>
+</tr>
+<tr>
+<td>/var/spool/cron/crontabs</td>
+<td>Individual user cron files (managed by crontab).</td>
+</tr>
+<tr>
+<td>/etc/anacrontab</td>
+<td>Manages jobs for systems that are not always on.</td>
+</tr>
+<tr>
+<td>/etc/crontab</td>
+<td>System-wide cron jobs.</td>
+</tr>
+<tr>
+<td>/etc/cron.daily</td>
+<td>Directory for daily cron jobs.</td>
+</tr>
+<tr>
+<td>/etc/cron.monthly</td>
+<td>Directory for monthly cron jobs.</td>
+</tr>
+<tr>
+<td>/etc/cron.weekly</td>
+<td>Directory for weekly cron jobs.</td>
+</tr>
+<tr>
+<td>/etc/cron.hourly</td>
+<td>Directory for hourly cron jobs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="journald">Journald</h3>
+<h5 id="what-is-journald">What is Journald?</h5>
+<ul>
+<li>Journald is a system service that collects and stores logging data from the kernel, system services, and applications.</li>
+<li>It replaces traditional logging systems like syslog in many modern Linux distributions.</li>
+<li>Logs are stored in a binary format (instead of plain text) and can be queried using the journalctl command.</li>
+<li>Centralized Logging: Collects logs from all system components in one place.</li>
+<li>Integration with Systemd: Logs are linked to systemd units (e.g., services, sockets)</li>
+<li>Persistent Logging: Logs can be stored persistently across reboots.</li>
+<li>Efficient Storage: Uses binary format and compression to save disk space.</li>
+</ul>
+<h5 id="view-all-logs">View All Logs:</h5>
+<pre><code>sudo journalctl
+</code></pre>
+<h5 id="view-logs-for-a-specific-service">View Logs for a Specific Service:</h5>
+<pre><code>sudo journalctl -u &lt;service-name&gt;
+sudo journalctl -u httpd
+</code></pre>
+<h5 id="view-logs-in-real-time">View Logs in Real-Time:</h5>
+<pre><code>sudo journalctl -f
+</code></pre>
+<h5 id="view-logs-from-the-current-boot">View Logs from the Current Boot:</h5>
+<pre><code>sudo journalctl -b
+</code></pre>
+<h5 id="filter-logs-by-priority">Filter Logs by Priority:</h5>
+<pre><code>sudo journalctl -p &lt;priority&gt;
+sudo journalctl -p err
+</code></pre>
+<p>Priorities include:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>emerg (0): Emergency</td>
+<td>alert (1): Alert</td>
+<td>crit (2): Critical</td>
+</tr>
+<tr>
+<td>warning (4): Warning</td>
+<td>notice (5): Notice</td>
+<td>info (6): Informational</td>
+</tr>
+</tbody>
+</table>
+<h5 id="view-logs-from-a-specific-time-range">View Logs from a Specific Time Range:</h5>
+<pre><code>sudo journalctl --since &quot;YYYY-MM-DD HH:MM:SS&quot; --until &quot;YYYY-MM-DD HH:MM:SS&quot;
+sudo journalctl --since &quot;2023-10-01 00:00:00&quot; --until &quot;2023-10-02 23:59:59&quot;
+</code></pre>
+<p>ls -ld /run/log/journal/
+journalctl -n</p>
+<h5 id="enable-persistent-logging">Enable persistent logging:</h5>
+<pre><code>sudo mkdir -p /var/log/journal
+sudo systemctl restart systemd-journald
+Set log retention policy:
+Edit /etc/systemd/journald.conf:
+      [Journal]
+      Storage=persistent
+      SystemMaxUse=1G
+systemctl restart systemd-journald
+#mkdir /var/log/journal
+#chown -R root:systemd-journal /var/log/journal
+#chmod g+s /var/log/journal/
+</code></pre>
+
+</body>
+</html>

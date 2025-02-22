@@ -1,0 +1,134 @@
+
+Booting ---> First Process Start 
+poweron ----> BIOS [Check HW]--->Detect Devices[HD Boot]--> Bootloader [GRUB2]---> Kernel --> Init/Systemd 
+Systemd -----> multi-user.target--> graphical.target
+
+Server With Gui 
+Minimal ===> Linux Without GUI 
+
+pstree 
+ps -ef ---> systemd PID 1   PPID 0
+
+
+sudo systemctl -t help --> all units Systemd 
+sudo systemctl status sshd 
+sudo systemctl start sshd ==> Manual Start 
+sudo systemctl stop sshd ===> Manual Stop 
+sudo systemctl enable sshd ==> Start Automatic After boot  
+sudo systemctl disable sshd ==> No Start Automatic After boot 
+
+
+ps -ef | grep "httpd" ==>list all Process httpd Service 
+
+sudo systemctl list-units --all ==> List all unit 
+sudo systemctl list-units --type=service ==> list all Service active 
+sudo systemctl list-units --type=service --all ==> List all service inactive 
+sudo systemctl list-units --all --state=incative
+
+- list all units enabled 
+sudo systemctl list-unit-files | grep enabled
+sudo systemctl list-unit-files | grep disable
+sudo systemctl list-unit-files | grep static
+
+static unit ----> can't disable vs Enable [don't have install section ] , helper Service to run directly 
+
+
+
+user ---- Systemd ----> unit [service - socket - timer .........]
+Service --> Collection of Process 
+Process --> Collection of Threads 
+
+=========================================================================================
+sudo systemctl mask httpd  ==> mask unit --> can't Start or Enable(Even Manually) 
+Created symlink from /etc/systemd/system/httpd.service to /dev/null.
+sudo systemctl stop httpd 
+sudo systemctl start httpd 
+Failed to start httpd.service: Unit is masked.
+sudo systemctl enable httpd 
+Failed to execute operation: Cannot send after transport endpoint shutdown
+=========================================================================================
+sudo systemctl unmask httpd 
+=========================================================================================
+Target [Mode]
+=============
+reboot.target 
+poweoff.target
+graphical.target [With GUI ]
+multi-user.target [Without GUI - Server]
+recuse.target [Maintance OS Login As Root [Basic Services ],mount Harddisk]
+Emergency.target===> Big Problems ===> systemctl Only 
+
+recuse-->multi-user--->GUI 
+
+systemctl get-default 
+
+sudo systemctl isolate multi-user.target [Switch without Change default]
+sudo systemctl isolate graphical.target [Switch without Change default]
+
+sudo systemctl set-default multi-user.target
+
+sudo systemctl list-dependencies multi-user.target 
+==============================================================================================
+- Reload Systemd Manager Configuration Files 
+    systemctl daemon-reload 
+==============================================================================================
+Create Your Own Services 
+==========================
+
+all Services Files 
+ls /usr/lib/systemd/system/
+
+1- Create Service File 
+    all Configuration /etc 
+    sudo vi /etc/systemd/system/Myfirsttask.service 
+2- Add Content 
+
+[Service]
+ExceStart=Fullpath
+User=mina   
+Group=mina 
+[Install] 
+WantedBy=multi-user.target 
+
+3- Reload Systemd 
+systemd daemon-reload
+
+4- Enable and Start 
+    sudo systemctl start Myfirsttask.service 
+    sudo systemctl enable Myfirsttask.service 
+=====================================================================================
+
+Journalctl ===> Binary logging  System (Part of Systemd)
+storage ==> Binary Format ==> Read by Journalctl ==? /run/log/journal (Volatile)
+/var/log/journal ==> presistent
+
+
+
+
+
+=========================Scheduling===============================
+Once time Specific Time 
+at 
+
+creat Task in Specific (Once time)
+
+at time 
+at teatime tomorrow --> 4Pm 
+at midnight+4days
+at 5pm august 3 2025 
+
+
+Method 1
+===========  
+at time 
+at >
+at >  cnrtl+D 
+Method2 
+echo "command" | at time 
+method3 
+at time < sriptPath 
+
+crontab 
+
+
+===============================================================

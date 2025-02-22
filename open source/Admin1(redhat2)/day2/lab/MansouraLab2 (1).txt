@@ -1,0 +1,48 @@
+1. Create a script named backup.sh in /usr/local/bin and Set the SUID bit so that the script runs with the permissions of the file owner (root).
+---------------------------------------------------------------------------------------
+2. Create a directory named shared_team in /home and Set the SGID bit so that any files created in this directory inherit the group ownership of the directory.
+---------------------------------------------------------------------------------------
+3. Set the sticky bit on the shared_team directory so that users can only delete their own files.
+---------------------------------------------------------------------------------------
+4.Create a shared directory named shared where:
+    add read and write permissions for a group named developers using ACL .
+    All new files and subdirectories inherit the group developers permissions(use the setgid permession).
+    Only the owner of a file can delete it (use the sticky bit).
+---------------------------------------------------------------------------------------
+5.What is the difference between traditional Linux permissions and ACLs?
+---------------------------------------------------------------------------------------
+6.Create a directory named lab_acls and navigate into it:
+---------------------------------------------------------------------------------------
+7.Create a file named testfile.txt:
+---------------------------------------------------------------------------------------
+8.Create two users (alice and bob) and a group (developers):
+---------------------------------------------------------------------------------------
+9.Add alice and bob to the developers group:
+---------------------------------------------------------------------------------------
+10.View and List the ACL of a file named testfile.txt.
+---------------------------------------------------------------------------------------
+11.read and write permissions for a user named alice to the file testfile.txt and Verify the changes.
+---------------------------------------------------------------------------------------
+12.Add execute permission for a group named developers to the file testfile.txt and Verify the changes.
+---------------------------------------------------------------------------------------
+13.Remove the ACL entry for the user alice from the file testfile.txt and Verify the changes.
+---------------------------------------------------------------------------------------
+14.Set read and execute permissions for bob on all files and subdirectories inside lab_acls.
+---------------------------------------------------------------------------------------
+15.How does the mask affect the effective permissions of named users and groups?
+---------------------------------------------------------------------------------------
+16.Set the mask for the file testfile.txt to r-- and observe how it affects the effective permissions of named users and groups.
+---------------------------------------------------------------------------------------
+17.Add read and write permissions for two users, alice and bob, to the file testfile.txt in a single command.
+---------------------------------------------------------------------------------------
+18.Backup the ACLs of the directory mydir to a file named mydir_acls.txt.
+---------------------------------------------------------------------------------------
+19.Check the Current SELinux Mode.
+---------------------------------------------------------------------------------------
+20.Change SELinux mode temporarily.
+---------------------------------------------------------------------------------------
+21.Change SELinux Mode Permanently.
+---------------------------------------------------------------------------------------
+22.what different between cp , mv ,cp -a (ContextSwitching).
+------------------------------------------------------------------------------
+23.Run Apache web Server on /websites [must SELinuxMode=Enforcing]

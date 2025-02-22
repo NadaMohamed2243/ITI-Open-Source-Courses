@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SELinux Notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h4 id="selinux">SELinux</h4>
+<ul>
+<li>SELinux (Security-Enhanced Linux) is a security mechanism built into Linux systems <strong>that provides an additional layer of protection</strong> by enforcing mandatory access control (MAC). It was developed by the NSA (National Security Agency) and integrated into the Linux kernel to enhance system security.</li>
+<li>Purpose: Enhances Linux security by restricting access to files, directories, and processes based on predefined policies.</li>
+<li>Enhanced Security: Protects against vulnerabilities and exploits by limiting what processes can do.</li>
+<li>Containment: Even if a process is compromised, SELinux restricts its access to other parts of the system.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>DAC stands for Discretionary Access Control</th>
+<th>MAC stands for Mandatory Access Control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- Basic Permission <br>- Special Permission <br>- ACL</td>
+<td>SELinux</td>
+</tr>
+<tr>
+<td>DAC is easier to implement.</td>
+<td>MAC is difficult to implement.</td>
+</tr>
+<tr>
+<td>DAC is less secure to use.</td>
+<td>MAC is more secure to use.</td>
+</tr>
+<tr>
+<td>Decisions will be based only on user ID and ownership.</td>
+<td>Decisions will be based on objects and tasks, and they can have their own ids.</td>
+</tr>
+<tr>
+<td>DAC is vulnerable to trojan horses.</td>
+<td>MAC prevents virus flow from a higher level to a lower level.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tr>
+  <th>Regular Linux access control</th>
+  <th>Regular Linux access control</th>
+</tr>
+<tr>
+  <td><img src="https://wiki.gentoo.org/images/e/e9/Linux_DAC_permissions.png"></td>
+  <td><img src="https://wiki.gentoo.org/images/8/8d/SELinux_MAC_permissions.png" ></td>
+</tr>
+</table>
+<img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-5-Deployment_Guide-en-US/images/e1ee3d0f34c277c6b734f8ba967ddb98/SELinux_Decision_Process.png">
+<h5 id="main-components">Main Components:</h5>
+<ul>
+<li>Subjects (Processes): Represented as stick figures or icons (e.g., a running program).</li>
+<li>Objects (Files, Directories, Ports): Represented as folders, files, or network icons.</li>
+<li>Security Context Labels: Shown as tags or labels attached to subjects and objects.</li>
+<li>Policy Enforcement: Represented as a shield or guard between subjects and objects.
+SELinux uses predefined policies to determine what actions are allowed or denied.
+Common policies include:
+<ul>
+<li>Targeted: Only specific processes (e.g., web servers, databases) are protected.</li>
+<li>Strict: All processes are protected by SELinux.</li>
+</ul>
+</li>
+</ul>
+<h5 id="example-scenario">Example Scenario</h5>
+<ul>
+<li>
+<p>A web server process (httpd_t) tries to access a file (/var/www/html/index.html) with the label httpd_sys_content_t.
+SELinux checks the policy and allows the access because the labels match the rules.
+If a different process (e.g., a database process) tries to access the same file, SELinux blocks it because the labels don’t match the policy.</p>
+</li>
+<li>
+<p>Imagine a web server process (httpd) trying to access a file (/var/www/html/index.html):
+Without SELinux: If the web server is hacked, the attacker could access or modify any file the web server has permissions for.
+With SELinux: The web server can only access files with the correct security context (e.g., httpd_sys_content_t). If the attacker tries to access other files, SELinux blocks it.</p>
+</li>
+</ul>
+<h5 id="how-selinux-works">How SELinux Works</h5>
+<ul>
+<li>When a process tries to access a resource (e.g., a file), SELinux checks:
+<ul>
+<li>The security context of the process.</li>
+<li>The security context of the resource.</li>
+<li>The policy rules to determine if the access is allowed.</li>
+</ul>
+</li>
+<li>If the access is allowed, the process proceeds. If not, SELinux denies the access and logs the event.</li>
+</ul>
+<h5 id="key-concepts">Key Concepts</h5>
+<ul>
+<li>Subjects: Processes or users attempting to access resources.</li>
+<li>Objects: Files, directories, ports, or devices being accessed.</li>
+<li>Policies: Rules defining what actions subjects can perform on objects.</li>
+<li>Labels: Every file and process has an SELinux context (label) that includes:
+<ul>
+<li>User: SELinux user (not the same as Linux user).</li>
+<li>Role: Mediates between users and processes.</li>
+<li>Type: Defines the domain for processes and the type for files.</li>
+<li>Level: Used in MLS (Multi-Level Security) mode.</li>
+</ul>
+</li>
+</ul>
+<h5 id="selinux-modes">SELinux Modes</h5>
+<p>Enforcing: SELinux actively enforces policies and denies unauthorized access.</p>
+<p>Permissive: SELinux logs policy violations but does not enforce them (useful for troubleshooting).</p>
+<p>Disabled: SELinux is turned off (not recommended for production systems).</p>
+<h5 id="1-check-selinux-status">1. Check SELinux Status</h5>
+<pre class="hljs"><code><div>  getenforce  (or) sestatus
+</div></code></pre>
+<ul>
+<li>Enforcing: SELinux is active and enforcing policies.</li>
+<li>Permissive: SELinux logs violations but does not enforce policies.</li>
+<li>Disabled: SELinux is turned off.</li>
+</ul>
+<h5 id="2-change-mode-selinux">2. Change Mode SELinux</h5>
+<h6 id="21-change-the-selinux-mode-temporarily">2.1. Change the SELinux Mode Temporarily</h6>
+<pre><code>suntax : sudo setenforce [0|1]
+Examples:
+    Set SELinux to Permissive mode:
+        sudo setenforce 0
+    Set SELinux to Enforcing mode:
+        sudo setenforce 1
+</code></pre>
+<h6 id="22-change-the-selinux-mode-permanently">2.2. Change the SELinux Mode Permanently</h6>
+<pre><code>a- Open the SELinux configuration file in a text editor:
+  sudo vi /etc/selinux/config
+b- Look for the line that says:
+  SELINUX=
+    It will have one of the following values:
+        SELINUX=enforcing (Enforcing mode)
+        SELINUX=permissive (Permissive mode)
+        SELINUX=disabled (Disabled mode)
+c- Change the value to the desired mode. For example:
+  SELINUX=permissive
+</code></pre>
+<h5 id="context">Context</h5>
+<img src="https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-SELinux_Users_and_Administrators_Guide-en-US/images/f7b4d4a7ee54ec0153a3422060470895/selinux-intro-apache-mariadb.png">
+<pre><code>ls -lZ /var/www/html 
+-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 test.html
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>unconfined_u</th>
+<th>object_r</th>
+<th>user_home_t</th>
+<th>s0</th>
+<th>file1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELinuxUser-</td>
+<td>Role</td>
+<td>type</td>
+<td>level</td>
+<td>File</td>
+</tr>
+</tbody>
+</table>
+<pre><code>ps axZ
+system_u:system_r:kernel_t:s0  2 ?  S  0:00 [kthreadd]
+
+ps -ZC httpd
+system_u:system_r:httpd_t:s0    19692 ?        00:00:01 httpd
+
+# Move and Copy With Context
+  touch file1 file2 file3 
+  cp file1 /var/www/html # ==&gt; Context Desintation  
+  mv file1 /var/www/html # ==&gt; Context Source 
+  cp -a file1 /var/www/html # ==&gt; Context Source
+  
+  ls -lZ /var/www/html/
+  -rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 file1
+  -rw-rw-r--. mina mina unconfined_u:object_r:user_home_t:s0 file2
+  -rw-rw-r--. mina mina unconfined_u:object_r:user_home_t:s0 file3
+</code></pre>
+<h6 id="apache-example-on-context">Apache Example on Context</h6>
+<pre><code>1. Show IP
+    ifconfig 
+2. Show Mode SElinux  
+    getenforce
+3. create fileHtml 
+    vi /var/www/html/test.html
+4. Edit config Apache 
+    sudo vi /etc/httpd/conf/httpd.conf
+    DocumentRoot &quot;/websites&quot;
+    &lt;Directory &quot;/websites&quot;&gt;
+        AllowOverride None
+        # Allow open access:
+        Require all granted
+    &lt;/Directory&gt;
+5. Restart Service and Make Html File in Website Folder
+    sudo mkdir /websites 
+    sudo vi /websites/test.html
+    sudo systemctl restart httpd.service 
+6. Test 
+    sudo setenforce 1
+    getenforce  #Enforcing 
+    Openbrowser ===&gt; Forbidden 
+
+    sudo setenforce 0
+    getenforce #Permissive
+    Openbrowser ===&gt; Work 
+    sudo cat /var/log/messages 
+7. Change Context for Website Folders 
+    ls -lZ /websites/
+      -rw-r--r--. root root unconfined_u:object_r:default_t:s0 test.html
+    ls -ldZ /var/www/html/
+      drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /var/www/html/       
+    sudo chcon -R -t httpd_sys_content_t /websites/        
+    ls -ldZ /websites/
+      drwxr-xr-x. root root unconfined_u:object_r:httpd_sys_content_t:s0 /websites/
+    ls -lZ /websites/
+      -rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 test.html
+    Openbrowser ==&gt; Enforcing Mode ===&gt; Work
+</code></pre>
+<h5 id="change-the-selinux-context">Change the SELinux context:</h5>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chcon</td>
+<td>Temporarily change the SELinux context of a file or directory.</td>
+</tr>
+<tr>
+<td>semanage</td>
+<td>fcontext	Permanently change the default SELinux context in the policy.</td>
+</tr>
+<tr>
+<td>restorecon</td>
+<td>Restore the default SELinux context for a file or directory.(Apply New Context)</td>
+</tr>
+</tbody>
+</table>
+<h6 id="chcon-temporary-change">chcon (Temporary Change)</h6>
+<pre><code>sudo chcon -R -t httpd_sys_content_t /web
+</code></pre>
+<h6 id="semanage-fcontext-permanent-change">semanage fcontext (Permanent Change)</h6>
+<pre><code>-a : add 
+-l : list
+-d : delete
+
+semanage fcontext -l | grep /var/www/
+syntax : semanage fcontext -a -t context file_path
+sudo semanage fcontext -a -t httpd_sys_content_t &quot;/website(/.*)?&quot;
+sudo semanage fcontext -d -t httpd_sys_content_t &quot;/website(/.*)?&quot;
+</code></pre>
+<h6 id="restore-default-context">Restore Default Context</h6>
+<pre><code>restorecon -v /var/www/html/index.html
+restorecon -Rv /var/www/html/
+</code></pre>
+<h6 id="verify-the-context">Verify the context:</h6>
+<pre><code>ls -Z /web
+Output : drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 /web
+</code></pre>
+<h5 id="changing-the-default-port-for-the-sshd-daemon">Changing the default port for the sshd daemon</h5>
+<h6 id="edit-the-ssh-configuration-file">Edit the SSH Configuration File:</h6>
+<pre><code>vi /etc/ssh/sshd_config 
+</code></pre>
+<h6 id="find-the-port-line">Find the Port Line:</h6>
+<pre><code>Port 2222
+Save and Exit 
+</code></pre>
+<h6 id="restart-the-ssh-service">Restart the SSH Service:</h6>
+<pre><code>sudo systemctl restart sshd
+</code></pre>
+<h5 id="update-firewall-rules">Update Firewall Rules</h5>
+<pre><code>For firewalld:
+  systemctl status firewalld.service
+  sudo firewall-cmd --permanent --add-port=2222/tcp
+  sudo firewall-cmd --reload 
+For ufw:
+  sudo ufw allow 2222/tcp
+</code></pre>
+<h5 id="update-selinux-to-allow-the-new-port">Update SELinux to Allow the New Port</h5>
+<pre><code>  - Check the Current SELinux Port Context:
+    sudo semanage port -l | grep ssh
+      output : ssh_port_t tcp 22
+  - Add the New Port to SELinux:
+    sudo semanage port -a -t ssh_port_t -p tcp 2222
+  - Verify the New Port:
+    sudo semanage port -l | grep ssh
+      output: ssh_port_t tcp 22, 2222
+</code></pre>
+<h5 id="test-the-new-ssh-port">Test the New SSH Port</h5>
+<pre><code>  ssh username@your_server_ip -p 2222
+</code></pre>
+<h5 id="allow-apachehttpd-to-connect-to-a-database">Allow Apache(HTTPD) to Connect to a Database</h5>
+<h6 id="check-if-the-httpdcannetworkconnectdb-boolean-is-enabled">Check if the httpd_can_network_connect_db boolean is enabled:</h6>
+<pre class="hljs"><code><div>    getbool -a | grep httpd  ( or ) semanage boolean -l | grep httpd 
+    getsebool httpd_can_network_connect_db
+      Output:
+      httpd_can_network_connect_db --&gt; off
+
+    
+</div></code></pre>
+<h6 id="enable-the-boolean">Enable the boolean:</h6>
+<pre><code>getsebool -a | wc -l  #316
+getsebool -a | grep mysql
+sudo setsebool mysql_connect_any on
+sudo setsebool -P httpd_can_network_connect_db on
+The -P flag makes the change persistent across reboots.
+</code></pre>
+<h5 id="allow-apachehttpd-to-send-emails">Allow Apache(HTTPD) to Send Emails</h5>
+<h6 id="check-if-the-httpdcansendmail-boolean-is-enabled">Check if the httpd_can_sendmail boolean is enabled:</h6>
+<pre><code>getsebool httpd_can_sendmail
+Output: httpd_can_sendmail --&gt; off
+</code></pre>
+<h6 id="enable-the-boolean">Enable the boolean:</h6>
+<pre><code>sudo setsebool -P httpd_can_sendmail on
+</code></pre>
+<ul>
+<li>Steps Using Apache
+sudo systemctl status httpd.service
+sudo systemctl start httpd.service</li>
+</ul>
+
+</body>
+</html>

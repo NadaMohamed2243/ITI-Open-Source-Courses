@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SpecialPermission-ACL-sudoers.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h5 id="special-permission">Special Permission</h5>
+<table>
+<thead>
+<tr>
+<th>Special Permission</th>
+<th>Effect on File</th>
+<th>Effect on Folder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u+s(sui)</td>
+<td>File Executes as the user that owns the file ,not the user that run the file</td>
+<td>No Effect (Can't Apply)</td>
+</tr>
+<tr>
+<td>g+s(gui)</td>
+<td>File Executes as the group that owns the file</td>
+<td>Files newly created in the directory have their group owner set to match the group owner of the directory</td>
+</tr>
+<tr>
+<td>o+t(sticky)</td>
+<td>No Effect</td>
+<td>Users with Write Permission on the directory can only remove files that they own.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>setuid</th>
+<th>setgid</th>
+<th>Sticky Bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Symbol</td>
+<td>s in user permissions</td>
+<td>s in group permissions</td>
+<td>t in others permissions</td>
+</tr>
+<tr>
+<td>Numeric Value</td>
+<td>4 (e.g., chmod 4755)</td>
+<td>2 (e.g., chmod 2755)</td>
+<td>1 (e.g., chmod 1777)</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Run as file owner</td>
+<td>Inherit group ownership</td>
+<td>Restrict file deletion</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>Executables needing owner privileges</td>
+<td>Shared directories or executables</td>
+<td>World-writable directories (e.g., /tmp)</td>
+</tr>
+<tr>
+<td>Example</td>
+<td>passwd, sudo</td>
+<td>Shared project directories</td>
+<td>/tmp directory</td>
+</tr>
+</tbody>
+</table>
+<h6 id="setuid">SetUid</h6>
+<pre class="hljs"><code><div>    ls -l /etc/shadow
+        <span class="hljs-comment">#----------. 1 root root 1404 Jan 30 08:05 /etc/shadow</span>
+    ls -l /usr/bin/passwd
+        <span class="hljs-comment">#-rwsr-xr-x. 1 root root 27856 Apr  1  2020 /usr/bin/passwd</span>
+
+    passwd
+        <span class="hljs-comment">#passwd: all authentication tokens #updated successfully.</span>
+    sudo chmod u<span class="hljs-_">-s</span> /usr/bin/passwd <span class="hljs-comment">#Remove SetUid Permission</span>
+    passwd
+        <span class="hljs-comment">#New password: </span>
+        <span class="hljs-comment">#Retype new password: </span>
+        <span class="hljs-comment">#passwd: Authentication token manipulation error</span>
+    sudo chmod u+s /usr/bin/passwd 
+    chmod 4775 file
+    <span class="hljs-comment">#S==&gt; Set user ID without Execute </span>
+    <span class="hljs-comment">#s==&gt; Set user ID with Execute </span>
+</div></code></pre>
+<h6 id="groupid">Groupid</h6>
+<pre class="hljs"><code><div>    chmod g+s &lt;directory_or_file&gt;
+    chmod 2755 &lt;directory_or_file&gt;
+    <span class="hljs-comment">#Folder Example</span>
+    ls -ld /run/<span class="hljs-built_in">log</span>/journal/
+        <span class="hljs-comment">#drwxr-sr-x. 3 root systemd-journal 60 Feb 13 08:33 /run/log/journal/</span>
+    sudo touch /run/<span class="hljs-built_in">log</span>/journal/file
+    ls -l /run/<span class="hljs-built_in">log</span>/journal/file
+        <span class="hljs-comment">#-rw-r--r--. 1 root systemd-journal 0 Feb 13 09:18 /run/log/journal/file</span>
+
+    <span class="hljs-comment">#File Example</span>
+    sudo ls -l /usr/bin/locate 
+        <span class="hljs-comment"># -rwx--s--x. 1 root slocate 40520 Apr 11  2018 /usr/bin/locate</span>
+    sudo ls -l /var/lib/mlocate/mlocate.db 
+        <span class="hljs-comment">#-rw-r-----. 1 root slocate 3177437 Feb 11 08:47 /var/lib/mlocate/mlocate.db</span>
+    updatedb 
+        <span class="hljs-comment">#updatedb: can not open a temporary file for `/var/lib/mlocate/mlocate.db'</span>
+
+</div></code></pre>
+<h6 id="sticky-bit">Sticky Bit</h6>
+<pre class="hljs"><code><div>    chmod +t &lt;directory&gt;
+    chmod 1777 &lt;directory&gt;
+    <span class="hljs-comment">#Example </span>
+    ls -ld /tmp
+        <span class="hljs-comment">#drwxrwxrwt. 21 root root 4096 Feb 13 09:20 /tmp/</span>
+</div></code></pre>
+<h4 id="acl-access-control-list">ACL (Access Control List)</h4>
+<ul>
+<li>
+<p>ACLs allow you to define permissions for specific users or
+groups beyond the standard owner/group/others model.
+<img width=50% src="https://ltonline.wordpress.com/wp-content/uploads/2013/05/165850_405226319555804_1801755219_n.jpg"></p>
+</li>
+<li>
+<p>User: Specific individuals or accounts.</p>
+</li>
+<li>
+<p>Group: Sets of users.</p>
+</li>
+<li>
+<p>Other: All users not covered by the owner or group.</p>
+</li>
+<li>
+<p>Object: Files or directories being controlled.</p>
+</li>
+<li>
+<p>ACE (Access Control Entry): Defines the permissions for a user/group/other on an object.</p>
+</li>
+<li>
+<p>Mask: Limits the maximum permissions for users and groups.</p>
+</li>
+<li>
+<p>Owner: The user who owns the file or directory.</p>
+</li>
+<li>
+<p>Default ACL: Defines default permissions for newly created files/subdirectories</p>
+</li>
+</ul>
+<h6 id="check-acl">CHECK ACL</h6>
+<pre><code>grep -i acl /boot/config*
+    /boot/config-3.10.0-1160.119.1.el7.x86_64:CONFIG_EXT4_FS_POSIX_ACL=y
+    /boot/config-3.10.0-1160.119.1.el7.x86_64:CONFIG_XFS_POSIX_ACL=y
+</code></pre>
+<h6 id="viewing-and-interperting-acl-permission">Viewing and Interperting ACL Permission</h6>
+<pre><code>ls -l file  ===&gt; plus sign(+)
+    -rwxrw----+ 1 user user 130 Mar 19 23:56 file
+</code></pre>
+<h6 id="view-file-acl">View File ACL</h6>
+<pre><code>getfacl reports.txt 
+getfacl /usr/bin/passwd 
+getfacl /usr/bin/locate 
+getfacl /tmp 
+</code></pre>
+<h6 id="main-component-acl">Main Component ACL</h6>
+<ol>
+<li>Commented Entries
+#file:
+#owner:
+#group:
+#flags:s--</li>
+<li>User Entries :
+user ::rwx
+user:mina:r--
+user:1002:r--</li>
+<li>Group Entries :
+group ::rwx
+group:mina:r--
+group:1002:r--</li>
+<li>Mask Entries :
+mask::rw
+defines the maximum effective permissions for all ACL entries (except the owner and others).</li>
+</ol>
+<h6 id="how-to-set-new-acl">How to Set new ACL</h6>
+<pre><code>setfacl -m u:username:rw /path/to/file
+setfacl -m o::rw /path/to/file
+setfacl -m g:sales:rw /path/to/file
+setfacl -R -m g:sales:rw /path/to/dir
+Copying the ACL of one file to another
+    getfacl  file | setfacl --set-file=- file2
+</code></pre>
+<h6 id="remove-an-acl-entry">Remove an ACL Entry</h6>
+<pre><code>-x to remove Acl Permisssions 
+-b roll back to the default ACL 
+setfacl -x u:ahmed /path/to/file
+setfacl -x u:ahmed,g:ali /path/to/file
+setfacl -b  /path/to/file
+</code></pre>
+<h6 id="acl-permission-precendence">ACL Permission Precendence</h6>
+<pre><code>if user == Owneruser :
+else if user in namedUser : 
+else if group == Ownergroup: 
+else if group in namedgroup:
+    #match 2 group ==&gt; take Highest Permission 
+else #other 
+
+groupadd group1 
+groupadd group2 
+usermod user1 -aG group1,group2
+setfacl -m g:group1:r,g:group2:rw file
+su - user1
+vi  file 
+</code></pre>
+<h5 id="default-permission">Default Permission</h5>
+<pre><code>mkdir dir1 
+setfacl -m d:u:ahmed:rw- dir1 
+getfacl dir1 
+touch dir1/file1 
+getfacl dir1/file1
+setfacl -x d:u:ahmed:rw- dir1 
+touch dir1/file2
+getfacl dir1/file2
+</code></pre>
+<h5 id="backup-acl--restore">Backup ACL &amp; Restore</h5>
+<pre><code>getfacl file.txt &gt; acl.txt 
+setfacl --set-file=acl.txt file1.txt 
+</code></pre>
+<h5 id="copy-with-acl">Copy With ACL</h5>
+<pre><code>  cp file1 file2  #don't Copy Permission &amp; ACL 
+  ls -l file1 file2
+  cp -p file2.txt file3.txt #Copy Permission &amp; ACL
+</code></pre>
+<h5 id="no-mask-calculated">No mask Calculated</h5>
+<p>setfacl -n -m g:user1:rwx file1.txt</p>
+<h5 id="important-notes">Important Notes</h5>
+<ul>
+<li>Filesystem Support: Not all filesystems support ACLs. Common Linux filesystems like ext3, ext4, XFS, and Btrfs do support ACLs.</li>
+<li>Backup and Restore: When backing up files with ACLs, ensure your backup tool supports ACLs (e.g., rsync with the -A option).</li>
+<li>Mask: The mask entry in an ACL defines the maximum effective permissions for all ACL entries (except the owner and others). It can be adjusted using setfacl.</li>
+</ul>
+<h3 id="sudo--sudeors">Sudo &amp; sudeors</h3>
+<h4 id="what-is-visudo">What is Visudo?</h4>
+<ul>
+<li>The sudo command is configured through a file located at /etc/sudoers.</li>
+<li>Never edit this file with a normal text editor! Always use the visudo command instead!</li>
+<li>The visudo command opens a text editor like normal, but it validates the syntax of the file upon saving. This prevents configuration errors from blocking sudo operations, which may be your only way of obtaining root privileges.</li>
+<li>Traditionally, visudo opens the /etc/sudoers file with the vi text editor. Ubuntu, however, has configured visudo to use the nano text editor instead.</li>
+</ul>
+<h5 id="what-is-the-purpose-of-the-sudoers-file">What is the purpose of the sudoers file?</h5>
+<ul>
+<li>sudoers file controls user permissions for executing commands as root or another user. It defines who can use sudo and under what conditions, enhancing security by managing administrative access.</li>
+</ul>
+<h5 id="what-is-a-sudo-command-in-simple-terms">What is a sudo command in simple terms?</h5>
+<ul>
+<li>A sudo command allows a permitted user to execute a command as the superuser or another user, as specified by the system’s security policy.</li>
+</ul>
+<h5 id="how-do-i-run-a-sudo-command">How do I run a sudo command?</h5>
+<ul>
+<li>To run a sudo command, type sudo followed by the command you wish to execute with elevated privileges, then enter your password when prompted.</li>
+</ul>
+<h5 id="what-is-a-sudo-command-used-for">What is a sudo command used for?</h5>
+<ul>
+<li>A sudo command is used to perform tasks that require administrative or elevated permissions, such as installing software, changing system settings, or managing user accounts.</li>
+</ul>
+<h5 id="can-i-run-sudo-as-a-root">Can I run sudo as a root?</h5>
+<ul>
+<li>Yes, you can run sudo as the root user, but it is redundant since the root user already has the necessary privileges to execute commands without the need for sudo.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature/Tool</th>
+<th>Sudo</th>
+<th>Su</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic Function</td>
+<td>Executes commands with another user’s privileges, typically the superuser.</td>
+<td>Switches to another user account, commonly the superuser.</td>
+</tr>
+<tr>
+<td>Purpose</td>
+<td>Executes a single command as root</td>
+<td>Switches to another user (default: root)</td>
+</tr>
+<tr>
+<td>Password</td>
+<td>Requires the user's</td>
+<td>password	Requires the target user's password</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Limited to the specified command</td>
+<td>Full access for the duration of the session</td>
+</tr>
+<tr>
+<td>Auditing</td>
+<td>Logs all commands executed with sudo</td>
+<td>No logging of commands by default</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Controlled by /etc/sudoers file</td>
+<td>No additional configuration required</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>- You need to run a single command with root privileges.<br>- You want to limit root access to specific commands.<br>- You want to log commands for auditing purposes.<br>- You don’t want to share the root password.</td>
+<td>- You need prolonged root access (e.g., for multiple commands).<br>- You want to switch to another user (not just root).<br>- You are comfortable sharing the root password.</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>    su - root 
+    visudo 
+        User_Alias ADMINS = john, mary
+        Cmnd_Alias STORAGE_CMDS = /bin/mount, /bin/umount
+        ADMINS ALL=(ALL) STORAGE_CMDS
+        john ALL=(ALL) NOPASSWD: /usr/bin/apt
+        ali ALL=(ALL) PASSWD: ALL
+    su - ali 
+    sudo -l
+    su - john 
+    sudo -l
+</div></code></pre>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+Standard Permission
+=========================
+OwnerUser      OwnerGroup 
+
+ls -l file 
+    - rw- r-- --- 
+       u   g    o
+================================================================================
+user ------> Access -----> File 
+              |
+         if user == Owner File ==Yes==> Owner user Permssion 
+         ifelse user member in  Owner group ==Yes==> Group Permssion 
+         else OtherPermission 
+===============================================================================================
+                   File                                               Folder 
+r            cat,head,tail, ..read file                                ls 
+w            Edit :  echo mina >> file                            Edit (touch , Remove , Rename,Mover)
+             vi(Interactive Tool):Before Write Need Read          Need Execute ---> to Enter Folder   
+             w:  vi file ===> :wq! (Override)
+             rw: vi file ===> :wq (Append)
+x                Run File                                          cd [rx ls -l ]
+==============================================================================================
+Folder ===> 
+mkdir test 
+chmod o=rwx test ==> Worldwide Writable 
+Mina ===> create Remove file 
+ali  ===> create Remove file 
+
+Sticky Bit 
+===============
+Force User remove Your Files Only 
+Notes : 
+Sticky Bit ===> Apply only Folder  (No Effect file)
+usecase : WorldWriteable (Restrict delete , move , Rename)
+chmod o+t path 
+chmod 1777 PATH 
+==============================================================================================
+setuid  ==> Run as File Owner (Not Effect Folder)
+usecase ==> Executables needing owner Privilegers [passwd,sudo]
+chmod u+s /usr/bin/passwd 
+chmod 4777 /usr/bin/passwd 
+
+Notes setuid ==> must apply Executable File 
+touch filemansoura
+ls -l filemansoura 
+    -rw-rw-r--. 1 mina mina 0 Feb 13 10:22 filemansoura
+chmod u+s filemansoura 
+ls -l filemansoura 
+    -rwSrw-r--. 1 mina mina 0 Feb 13 10:22 filemansoura
+
+==============================================================================================
+chmod 5777 /usr/bin/passwd  ===> Not See it 
+===============================================================================================
+groupid Permission 
+
+Folder 
+
+
+File 
+Run as FileGroupOwner 
+===============================================================================================
+
+ACL  Access Control List 
+
+allow  define Permission specific user or group
+Other ==> r-- 
+mina ===>rwx 
+mina ===>rw 
+Ahmed ----Access---File 
+            | 
+         if user == Owner File ==Yes==> Owner user Permssion 
+         ifelse user member in  Owner group ==Yes==> Group Permssion
+         else if user Rule  ===> rw
+         else if group Rule  
+         else OtherPermission  ==> r        
+
+
+View FileACL 
+ls -l /tmp/test 
+-rw-rw-r--. 1 mina mina 11 Feb 13 11:00 /tmp/test
+getfacl /tmp/test
+
+setfacl -m u:ali:rw /tmp/test
+ls -l /tmp/test 
+-rw-rw-r--+ 1 mina mina 11 Feb 13 11:00 /tmp/test
+
+getfacl /tmp/test 
+    getfacl: Removing leading '/' from absolute path names
+    # file: tmp/test
+    # owner: mina
+    # group: mina
+    user::rw-
+    user:ali:rw-
+    group::rw-
+    mask::rw-
+    other::r--
+
+
+setfacl -m u:ali:r 
+setfacl -m u:user1:w 
+setfacl -m u:user2:rwx 
+
+mask:rwx
