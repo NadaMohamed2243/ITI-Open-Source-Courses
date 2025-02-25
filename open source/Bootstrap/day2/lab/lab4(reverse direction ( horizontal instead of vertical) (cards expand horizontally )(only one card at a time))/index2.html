@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Horizontal Accordion</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+   
+    <style>
+        body {
+            padding-top: 10px;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        .card {
+            width: 100%; 
+            transition: width 0.2s ease;
+        }
+
+        .card.expand {
+            width: 100%;
+        }
+
+        .card.small {
+            width: 5%; 
+        }
+
+        .card-header {
+            cursor: pointer;
+            border: 2px solid black;
+            text-align: center;
+        }
+
+        .collapse.show {
+            display: block;
+            width: 100%;
+        }
+
+        .collapse:not(.show) {
+            display: none;
+        }
+
+        .card-body {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="accordion" id="accordionAll">
+            <div class="card" id="cardone">
+                <div class="card-header bg-info" data-toggle="collapse" data-target="#collapseOne">
+                    card one
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordionAll">
+                    <div class="card-body">
+                        one...................
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div><!-- end card -->
+
+            <div class="card" id="cardtwo">
+                <div class="card-header bg-info" data-toggle="collapse" data-target="#collapseTwo">
+                    card two
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordionAll">
+                    <div class="card-body">
+                        two..............
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div><!-- end card -->
+
+            <div class="card" id="cardthree">
+                <div class="card-header bg-info" data-toggle="collapse" data-target="#collapseThree">
+                    card Three
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordionAll">
+                    <div class="card-body">
+                       three....................
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div><!-- end card -->
+        </div><!-- end accordion -->
+    </div>
+
+    <script>
+        let accordionCards = document.querySelectorAll(".card");
+
+        accordionCards.forEach(card => {
+            card.addEventListener("click", () => {
+                accordionCards.forEach(element => {
+                    element.classList.remove("expand");
+                    element.classList.add("small");
+                });
+                card.classList.remove("small");
+                card.classList.add("expand");
+            });
+        });
+    </script>
+
+    <script src="js/JQuery-3.3.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>

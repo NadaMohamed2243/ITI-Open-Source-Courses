@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Accordion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    body {
+        padding-top: 10px;
+    }
+
+    img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .accordion {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: row;
+        width: 200px;
+        transition: width 0.3s ease;
+        overflow: hidden;
+    }
+
+    .card.expanded {
+        /* width: 600px;  */
+        width: 100%;
+    }
+
+    .card-header {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+    }
+
+    .card-body {
+        display: none;
+        flex: 1;
+    }
+
+    .collapse.show .card-body {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div id="accordion" class="accordion">
+            <!-- Card One -->
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary my-2" data-bs-toggle="collapse"
+                        data-bs-target="#cardone">CardOne</button>
+                </div>
+                <div class="collapse" id="cardone" data-bs-parent="#accordion">
+                    <div class="card-body text-center">
+                        <img src="9.jpg" class="rounded-circle mx-2" />
+                        <img src="10.jpg" class="rounded-circle mx-2" />
+                        <img src="11.jpg" class="rounded-circle mx-2" />
+                        <img src="12.jpg" class="rounded-circle mx-2" />
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Two -->
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary my-2" data-bs-toggle="collapse"
+                        data-bs-target="#cardtwo">CardTwo</button>
+                </div>
+                <div class="collapse" id="cardtwo" data-bs-parent="#accordion">
+                    <div class="card-body text-center">
+                        <img src="9.jpg" class="rounded-circle mx-2" />
+                        <img src="10.jpg" class="rounded-circle mx-2" />
+                        <img src="11.jpg" class="rounded-circle mx-2" />
+                        <img src="12.jpg" class="rounded-circle mx-2" />
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Three -->
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary my-2" data-bs-toggle="collapse"
+                        data-bs-target="#cardthree">CardThree</button>
+                </div>
+                <div class="collapse" id="cardthree" data-bs-parent="#accordion">
+                    <div class="card-body text-center">
+                        <img src="9.jpg" class="rounded-circle mx-2" />
+                        <img src="10.jpg" class="rounded-circle mx-2" />
+                        <img src="11.jpg" class="rounded-circle mx-2" />
+                        <img src="12.jpg" class="rounded-circle mx-2" />
+                    </div>
+                    <div class="card-footer">
+                        <p class="w-100 text-center bg-dark text-light">Card Footer</p>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end of accordion -->
+    </div><!-- end of container -->
+
+    <script>
+        // Add event listeners to handle the expanded class
+        document.querySelectorAll('.collapse').forEach(collapse => {
+            collapse.addEventListener('show.bs.collapse', function () {
+                this.closest('.card').classList.add('expanded');
+            });
+
+            collapse.addEventListener('hide.bs.collapse', function () {
+                this.closest('.card').classList.remove('expanded');
+            });
+        });
+    </script>
+</body>
+
+</html>
