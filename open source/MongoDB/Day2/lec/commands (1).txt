@@ -1,0 +1,261 @@
+cls
+// clear screen
+db.help()
+// show help
+db
+// shows the current working database
+show dbs
+// : show the existing databases
+use (db name)
+// : switch to the database ;if it doesn't exists create it and switch to it.
+show collections
+// : show the current collections in the database we are in
+
+db.students.insert({name: "ahmed"})
+// implicit collection creation
+db.createCollection("collection name",{
+capped:true, define the size of collection,
+max: 5, // define the number of documents in the collection
+size: 1000000 // define the size in Bytes,
+
+})
+// explicit collection creation
+db.capped_collection.isCapped()
+// return a boolean indicating whether capped collection or not
+
+/**     Crud Operation      **/
+db.students.insert({name:"test"})
+// to insert a single document
+db.students.insertMany([{name:"test"},{name:"test2",age:15}])
+// to insert multiple documents
+db.students.find(/*filtering criteria */)
+// to find documents
+db.students.find().pretty()
+// to format the returned value
+db.students.updateMany(/*filtering criteria*/,{$set:{}})
+// to update Multiple documents 
+// update options, $set, $unset
+db.students.updateOne(/*filtering criteria*/,{$set:{}})
+// to update single document
+// update options, $set, $unset(1,0)
+
+db.students.deleteMany(/*filtering criteria*/)
+// to delete multiple documents
+
+db.students.deleteOne(/*filtering criteria*/)
+// to delete Single document
+
+
+/************ Comparison Operators **************/
+$gt-> greater than
+$lt-> less than
+$gte -> greater than or equal
+$lte -> less than or equal
+$in -> property: {$in: [""]}
+$nin -> property: {$nin: [""]}
+$ne -> not equal
+
+/************ Logical Operators **************/
+
+(), ()
+$and -> 2 conditions meet requirements
+$or -> at least one of them is true
+$nor -> joins query returns all documents that fail to match both clauses
+$not -> 
+
+/************ Array Operators **************/
+$all-> return all documents that have the elements in the provided array 
+ex: db.users.find({tags:{$all:["css","js"]}})
+
+$elemMatch-> return documents that match certain criteria
+ex: db.users.find({scores:{$elemMatch:{$lt:70}}})
+$size-> return documents that have number of elements equal to size
+
+
+
+/************ Query Elements operator Operators **************/
+
+$exists: check if element exists
+ex: db.users.find({age: {$exists: 0}})
+
+$type: return documents with certain types
+ex: db.users.find({age: {$type: "string"}})
+
+// enforcing a validation schema
+db.createCollection("schools_test", {
+validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["title","establishedDate"],
+			properties: {
+				"title": {
+					bsonType: "string",
+					"description": "must be string"
+				},
+				"establishedDate":{
+					bsonType: "int",
+					"description": "must be number"
+				},
+			}
+		
+		}
+	}
+})
+
+
+
+
+--------------------------
+Day 2
+
+
+database administration
+
+db.createUser({
+	user: "hamada",
+	pwd : passwordPrompt(),
+	roles: [
+		{role: "userAdminAnyDatabase" ,db: "admin"},
+		{role: "readWriteAnyDatabase", db:"admin"}
+	]
+})
+
+---
+db.createUser({
+	user: "readUser",
+	pwd: passwordPrompt(),
+	roles: [
+		{role: "read", db: "ecommerce"}
+	]
+})
+
+-------------------------------------
+/*************************        Projection            ***********************/
+db.users.find({},{age:1,_id:0})
+
+// Projection Operators
+
+$ -> return the data matching the filtering criteria
+db.users.find({subjects:"js"},{"subjects.$":1})
+
+$elemMatch
+--
+db.users.insert({name:"test1",year: 2022,data: [{age:10,salary: 100},{age:40,salary: 1000}]})
+db.users.insert({name:"test2",year: 2020,data: [{age:50,salary: 18},{age:80,salary: 60}]})
+
+retruning data matching our conditions
+db.users.find({data:{$exists:true,$elemMatch:{salary:{$gt:500}}}})
+
+$slice
+// used to get  subset of an array
+
+db.posts.find({},{comments: {$slice: 2}})
+
+
+
+
+-------------------------
+/*******************************         Upadting Operators         **********************************/
+
+$set
+	db.users.updateOne({},{$set: {scores: 60}})
+$unset
+	db.users.updateOne({},{$unset: {scores: 60}})
+$push
+	db.users.updateOne({subjects: {$exists:true}},{$push: {subjects: "angular"}})
+$each
+	db.users.updateOne({subjects: {$exists:true}},{$push: {subjects: {$each:["html","css","react"]}}})
+$pop remove last element from array
+	db.users.updateOne({subjects: {$exists:true}},{$pop:{subjects:1}})
+$pull: remove from an array based on criteria
+	db.users.updateOne({subjects: {$exists:true}},{$pull:{subjects: {$in:["js","angular"]}}})
+$inc 
+	db.products.updateMany({},{$inc:{price: 500}})
+$ updates the value that is matching inside the array based on the first encounter
+	db.users.updateOne({subjects:"mongo"},{$set: {"subjects.$":"mongodb"}})
+
+
+
+
+/********************* Find Methods *********************/
+count
+
+skip
+
+sort
+
+limit
+
+
+--------------------------------------------
+/***************************************** Indexes **********************************/
+
+Single Field Indexe
+db.users.createIndex({username:1})
+
+Compound Field index
+db.users.createIndex({city:1, area:1})
+
+Unique INdex
+db.users.createIndex({email:1},{unique:1})
+
+Time To Live INdex
+
+db.users.createIndex({createdAt:1},{expiresAfterSeconds:1})
+
+-----------
+text indext : for searching text {description: "text"}
+db.users.createIndex({description: "text"}) -> hi, i am ali i travel to mansourah i eat an apple (ali,travel,mansourah,)
+
+
+GeoSpacial Index: for location based queries {location: "2dsphere"}
+
+
+
+/***********************  Aggregation Pipelines *********************/
+
+$match
+$project
+db.orders.aggregate([{$match:{branch: "Cairo"}},{$project:{branch:1,total:1}}])
+
+// $group
+
+
+const books = [
+	{title:"the banquet",author:"dante",copies:10},
+	{title:"harry",author:"homer",copies:2},
+	{title:"potter",author:"dante",copies:1},
+	{title:"48 laws",author:"homer",copies:10},
+	{title:"odyssey",author:"dante",copies:2}
+];
+// reduce
+books.reduce((agg,cur)=>{
+
+	if(agg[cur.author]){
+		agg[cur.author].push(cur.title)
+	}else{
+		agg[cur.author] = [cur.title]
+	}
+	return agg;
+},{})
+
+
+
+// {"dante": ["the banquet","potter"]}
+db.books.aggregate([{$group:{_id:"$author",books:{$push:"$title"}}}])
+
+
+// $addFields
+// $lookup
+// $unwind -> seperate the field array into documents
+
+db.posts.aggregate([
+{$lookup:{
+	from:"users",
+	"localField":"userId",
+	"foreignField": "id",
+	"as":"users"
+}},
+{$unwind:"$users"}
+])
+

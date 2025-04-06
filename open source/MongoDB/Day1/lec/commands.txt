@@ -1,0 +1,103 @@
+cls
+// clear screen
+db.help()
+// show help
+db
+// shows the current working database
+show dbs
+// : show the existing databases
+use (db name)
+// : switch to the database ;if it doesn't exists create it and switch to it.
+show collections
+// : show the current collections in the database we are in
+
+db.students.insert({name: "ahmed"})
+// implicit collection creation
+db.createCollection("collection name",{
+capped:true, define the size of collection,
+max: 5, // define the number of documents in the collection
+size: 1000000 // define the size in Bytes,
+
+})
+// explicit collection creation
+db.capped_collection.isCapped()
+// return a boolean indicating whether capped collection or not
+
+/**     Crud Operation      **/
+db.students.insert({name:"test"})
+// to insert a single document
+db.students.insertMany([{name:"test"},{name:"test2",age:15}])
+// to insert multiple documents
+db.students.find(/*filtering criteria */)
+// to find documents
+db.students.find().pretty()
+// to format the returned value
+db.students.updateMany(/*filtering criteria*/,{$set:{}})
+// to update Multiple documents 
+// update options, $set, $unset
+db.students.updateOne(/*filtering criteria*/,{$set:{}})
+// to update single document
+// update options, $set, $unset(1,0)
+
+db.students.deleteMany(/*filtering criteria*/)
+// to delete multiple documents
+
+db.students.deleteOne(/*filtering criteria*/)
+// to delete Single document
+
+
+/************ Comparison Operators **************/
+$gt-> greater than
+$lt-> less than
+$gte -> greater than or equal
+$lte -> less than or equal
+$in -> property: {$in: [""]}
+$nin -> property: {$nin: [""]}
+$ne -> not equal
+
+/************ Logical Operators **************/
+
+(), ()
+$and -> 2 conditions meet requirements
+$or -> at least one of them is true
+$nor -> joins query returns all documents that fail to match both clauses
+$not -> 
+
+/************ Array Operators **************/
+$all-> return all documents that have the elements in the provided array 
+ex: db.users.find({tags:{$all:["css","js"]}})
+
+$elemMatch-> return documents that match certain criteria
+ex: db.users.find({scores:{$elemMatch:{$lt:70}}})
+$size-> return documents that have number of elements equal to size
+
+
+
+/************ Query Elements operator Operators **************/
+
+$exists: check if element exists
+ex: db.users.find({age: {$exists: 0}})
+
+$type: return documents with certain types
+ex: db.users.find({age: {$type: "string"}})
+
+// enforcing a validation schema
+db.createCollection("schools_test", {
+validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["title","establishedDate"],
+			properties: {
+				"title": {
+					bsonType: "string",
+					"description": "must be string"
+				},
+				"establishedDate":{
+					bsonType: "int",
+					"description": "must be number"
+				},
+			}
+		
+		}
+	}
+})
