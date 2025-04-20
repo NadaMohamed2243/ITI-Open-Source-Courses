@@ -1,0 +1,131 @@
+/* Basic styles for the Notes App */ 
+body { 
+    font-family: Arial, sans-serif; 
+    line-height: 1.6; 
+    margin: 0; 
+    padding: 20px; 
+    background-color: antiquewhite;
+  } 
+   
+  .container { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 6px 6px rgba(21, 21, 21, 0.1);
+  background-color: rgb(252, 248, 243);
+  } 
+   
+  /* TODO: Add additional styles as needed */ 
+  .header { 
+    text-align: center; 
+    margin-bottom: 20px; 
+  }
+
+  .form-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: antiquewhite;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #11c326;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #078015;
+  }
+  
+  #cancelBtn {
+    background-color: #f32112;
+  }
+  
+  #cancelBtn:hover {
+    background-color: #981c1c;
+  }
+
+
+
+
+
+  /*show all notes style*/ 
+
+  .note { 
+    display: block; 
+    margin-bottom: 20px; 
+    padding: 15px 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    border-left: 4px solid #757f3f;
+    background-color: antiquewhite; 
+  }
+
+  .note h2 { 
+    margin: 0; 
+    display: inline;
+    padding: 5px 40px; 
+    background-color: rgb(252, 248, 243);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+  }
+
+  .note p { 
+    margin: 10px 0; 
+    padding: 10px 40px; 
+    background-color: rgb(252, 248, 243);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+  }
+  .note button { 
+    background-color: #f44336; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+  }
+
+  .note-actions button:first-child {
+    background-color: #116dc3;
+  }
+  
+  .note-actions button:first-child:hover {
+    background-color: #0c467d;
+  }
+  
+  .note-actions button:last-child {
+    background-color: #f32112;
+  }
+  
+  .note-actions button:last-child:hover {
+    background-color: #981c1c;
+  }
