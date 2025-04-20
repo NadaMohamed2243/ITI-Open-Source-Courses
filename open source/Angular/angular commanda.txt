@@ -1,0 +1,36 @@
+npm i -g @angular/cli   (one time)
+
+
+----make project 
+
+ng new projectName
+
+
+-- stat server
+ng serve --open 
+or
+ng s -o 
+
+
+--- generate component
+
+ng generate component about 
+
+ng g c setting
+
+
+--- generate component  with skip file
+ng g c setting --skip-tests
+
+
+-- generate interface
+ng g i User
+
+
+-- add bootstarb 
+ng add @ng-bootstrap/ng-bootstrap
+
+
+-- generate service (shared data)
+
+ng g s servicename

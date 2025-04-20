@@ -1,0 +1,19 @@
+<div class="container m-5">
+  <h1 class="text-center m-5">Categories</h1>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @for (category of categories; track category.id) {
+
+    <div class="col">
+      <div class="card shadow-sm">
+        <img [src]="category.imageUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text">This is category description Lorem ipsum dolor sit amet consectetur adipisicing elit .</p>
+          <div class="d-flex justify-content-start align-items-center gap-3">
+            <h3>{{category.price}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

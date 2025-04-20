@@ -1,0 +1,31 @@
+<div class="container m-5">
+  <h1 class="text-center m-5">Recommended For You</h1>
+  <hr style="border: none; height: 2px; background-color: rgb(44, 61, 1);">
+  <!-- -----------dropdown------------------ -->
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Choose Category
+    </button>
+    <ul class="dropdown-menu">
+      @for (category of categories; track $index) {
+        <li><a class="dropdown-item" (click)="ChooseCategory(category)">{{category}}</a></li>
+      }
+    </ul>
+  </div>
+  <!-- ------- -->
+  <hr style="border: none; height: 2px; background-color: rgb(44, 61, 1);">
+  <!-- Ensure the row uses flex-wrap and aligns items to stretch -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @for (product of recommendedProducts; track product.id) {
+    <!-- Each column should stretch to match height -->
+    <div class="col d-flex">
+      <!-- Pass product to child -->
+      <app-product-card [product]="product" class="w-100"></app-product-card>
+    </div>
+    } @empty {
+    <div class="col text-center">
+      <h2>No products available</h2>
+    </div>
+    }
+  </div>
+</div>
