@@ -1,0 +1,82 @@
+Download FG images from https://drive.google.com/drive/folders/16xkwlCwgYpkdHj_g66eeSZHlMFJfI-8r?usp=drive_link
+1-Use VMWare workstation, Linux Virtual Machine (Web Server), Fortigate FW (FG Image)
+2-Internal Virtual Network
+	1-In VMWare workstation, create a virtual switch
+		1-Open VMWare workstation
+		2-Edit/Virtual Network Editor
+		3-Add Network
+		4-Choose Host-only
+		5-Press Add
+		6-Press on VMNet0 (Bridged)
+		7-Bridged to: (Network interface connected to internet)
+		8-Press Save
+	2-In VMWare workstation, Create a Virtual Machine (Linux Web Server)
+	3-Configure VM Network
+		1-Right click on VM, choose settings
+		2-From left, choose network adapter
+		3-From right, choose Custom,\
+		4-Choose VMNet created in step 2-1-3
+		5-Choose save
+	4-Poweron VM
+	5-Configure VM Networking
+		1-Edit /etc/netplan/00-installer-config.yaml
+		2-dhcp4: true -> false
+		3-Save, exit, sudo netplan apply
+	6-Create FortiGate VM
+		1-In VMWare workstation, press File/New
+		2-Locate 	Fortigate-VM64-hw07-vmxnet03.ovb
+		3-Check i Accept, press Next
+		4-Choose directory to store the VM
+		5-Press import
+	7-Right click on Firewall, PRess settings, clear all connect on poweron Interfaces
+	8-Choose Network ADapter 2: Change cutom to (VMNet4) the same as Web server
+	9-PRess save	
+	10-Power on Fortigate FW
+	11-Login username admin, password blank no password
+	12-Configure Firewall management IP
+		13-configure system interface
+		14-edit port1
+		15-set mode static
+		16-set ip 192.168.217.100/24
+		17-end
+	18-Configure firewall ntp (Disable)
+		19-configure system ntp
+		20-sety type custom
+		21-set server-mode disable
+		22-set ntpsync disable
+		23-end
+	24-Reboot
+		25-execute reboot
+	26-Connect Network adapter 1, and 2
+	27-Open your browser
+		http://192.168.217.100
+	28-On FG management console, Press Network/Interfaces
+	29-Expand network list, Double click on port1.
+		Alias: ExternalPort
+		Role: WAN
+		Press OK
+	30-Double click on port2
+		Alias: ServerPort
+		Role: DMZ
+		IP/Network: 10.0.0.1/24
+		Administrative : Ping
+	31-From VM:
+		ping 10.0.0.1 : Success
+		ping 4.2.2.2 : Not (FG can not access internet, no policy enable VM to access internet)
+		
+	31-Test Fortigate connection to internet
+		From FG command line, execute ping 4.2.2.2
+		FG can not ping internet (Because FG has no Default route)
+	32-To configure FG Default route (Network/Static routes), Press create new, gateway : 192.168.1.1,interface port1, press ok
+	33-Create a FG policy to enable internet access to the VM
+	34-In FG console, Policy & Objects / IPv4 Policy/ Create new policy
+		Name: ServerToInternet
+		
+	You task for day1: 
+	Need to open browser:
+		http://192.168.1.100:8080	-> Web server 10.0.0.3 replies
+		
+	Configure Fortigate to forward all incoming traffic to port 8080 to 10.0.0.3:80
+	
+	
+	 

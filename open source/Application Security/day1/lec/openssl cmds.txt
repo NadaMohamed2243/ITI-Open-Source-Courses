@@ -1,0 +1,38 @@
+http://www.madboa.com/geek/openssl/
+1-Generate Crypt style (Solaris):
+	openssl passwd [password]
+	openssl passwd -salt [salt] [password]
+
+2-Generate shadow style
+	openssl passwd -1 [password]
+	openssl passwd -1 -salt [salt] [password]
+3-Test for prime
+	openssl prime [number]
+4-Generate random data
+	openssl rand -base64 [num]
+5-To digest a file:
+	openssl dgst -md5 [file]
+	openssl dgst -sha1 [file]
+6-Encrypt/decrypt a file (Sym enc)
+	Enc: openssl enc -des -in myfile.txt -out myfile.txt.enc
+	Dec: openssl enc -des -d -in  myfile.txt.enc -out myfile.txt.dec
+7-Generate RSA private key:
+	openssl genrsa -out [private key file] [key length]
+	openssl genrsa -des3 -out [private key file] [length]
+8-Generate RSA public key from private key:
+	openssl rsa -in [private key file] -pubout > [Public key]
+
+9-Using private key/Public key to sign/Verify a file:
+	Sign: openssl dgst -sha1 -sign [Private key file] -out [Signature file] [Source file]
+	Verify: openssl dgst -sha1 -verify [public key] -signature [signature file] [source file]
+10-Using private key/public to encrypt/decrypt:
+	Encrypt: openssl rsautl -in [Source file] -out [Out file] -pubin -inkey [Public key] -encrypt
+	Decrypt: openssl rsautl -in [source file] -out [out file] -inkey [private key] -decrypt
+11-Create a self signed certificate form a private key:
+	openssl req -new -x509 -key [Private key] -out [Certificate file] -days 1095
+
+12-To create a CSR
+	openssl req -new -key [Private key] -out [out csr]
+
+	
+
