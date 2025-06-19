@@ -1,0 +1,33 @@
+{% extends 'books/base.html'%}
+{% load static %}
+
+{% block 'content' %}
+<main>
+    <div class="d-flex justify-content-evenly flex-wrap gap-3">
+        {% for book in books %}
+        <!-- <li>
+                <a href="{% url 'books:single' book.id %}">{{book.name}}</a>
+            </li> -->
+        <div class="card m-5 border-dark" style="width: 18rem;">
+            <!-- <img src="{% static book.image %}" class="card-img-top" alt="..."> -->
+            <img src="{% static 'books/images/2.png' %}" alt="books">
+            <div class="card-body">
+                <h5 class="book-name text-center">{{book.name}}</h5>
+                <hr>
+                <h6 class="card-text">Publish date : {{book.publish_date}}</h6>
+                <h6 class="card-text">Add to site at : {{book.add_to_site_at}}</h6>
+                <hr>
+                <a href="{% url 'books:author' book.author.id %}" class="btn btn-info">Author : {{book.author}}</a>
+                <hr>
+                <h6 class="card-text">Price : {{book.price}}$</h6>
+                <hr>
+                <h6 class="card-text">appropriate : {{book.appropriate}}</h6>
+                <hr>
+                <a href="{% url 'books:single' book.id %}" class="btn btn-info">See All details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- <img src="{% static 'books/images/1.jpg' %}" alt="girl image"> -->
+</main>
+{% endblock %}

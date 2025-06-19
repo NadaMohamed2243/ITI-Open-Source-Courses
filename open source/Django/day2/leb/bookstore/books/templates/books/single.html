@@ -1,0 +1,23 @@
+{% extends 'books/base.html'%}
+{% load static %}
+
+{% block 'content' %}
+<div class="card mb-3 p-5 border-dark w-75 mx-auto vh-80">
+  <!-- <img src="{% static book.image %}" class="card-img-top" style="height: 90%;" alt="..."> -->
+  <div class="card-body">
+    <h5 class="book-name text-center">{{book.name}}</h5>
+    <hr>
+    <div class="d-flex justify-content-evenly">
+ <h6 class="card-text">Publish date : {{book.publish_date}}</h6>
+    <h6 class="card-text">Add to site at : {{book.add_to_site_at}}</h6>
+    </div>
+   
+    <hr>
+    <h6 class="card-text text-center">Author : {{book.author}}</h6>
+    <hr>
+    <h6 class="card-text text-center">Price : {{book.price}}$</h6>
+    <hr>
+    <h6 class="card-text text-center">appropriate : {{book.appropriate}}</h6>
+  </div>
+</div>
+{% endblock %}

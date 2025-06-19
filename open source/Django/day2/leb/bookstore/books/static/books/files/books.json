@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "name": "Book1",
+        "description": "A Book1 is classic novel about the American Dream, set in the Roaring Twenties.",
+        "image": "books/images/1.jpg"
+    },
+    {
+        "id":2,
+        "name": "Book2",
+        "description": "A Book2 is classic novel about the American Dream, set in the Roaring Twenties.",
+        "image": "books/images/2.png"
+    },
+    {
+        "id":3,
+        "name": "Book3",
+        "description": "A Book3 is classic novel about the American Dream, set in the Roaring Twenties.",
+        "image": "books/images/3.png"
+    },
+    {
+        "id":4,
+        "name": "Book4",
+        "description": "A Book4 is classic novel about the American Dream, set in the Roaring Twenties.",
+        "image": "books/images/4.png"
+    },
+    {
+        "id":5,
+        "name": "Book5",
+        "description": "A Book5 is classic novel about the American Dream, set in the Roaring Twenties.",
+        "image": "books/images/4.png"
+    }
+]

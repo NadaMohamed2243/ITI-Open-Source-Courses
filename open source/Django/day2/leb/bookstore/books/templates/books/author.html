@@ -1,0 +1,27 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block 'content' %}
+<main>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Author: {{ author.name }}</h2>
+        <h3>List Books :</h3>
+        <div class="d-flex justify-content-evenly flex-wrap gap-3">
+            {% for book in books %}
+            <div class="card m-3 border-dark" style="width: 18rem;">
+                <img src="{% static 'books/images/2.png' %}" class="card-img-top" alt="book image">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ book.name }}</h5>
+                    <hr>
+                    <h6 class="card-text">Publish date: {{ book.publish_date }}</h6>
+                    <h6 class="card-text">Price: {{ book.price }}$</h6>
+                    <a href="{% url 'books:single' book.id %}" class="btn btn-info mt-3 w-100">See All Details</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No books found for this author.</p>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
