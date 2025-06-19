@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <!-- Modal -->
+    <div class="modal" id="nameModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h3 class="text-center my-3 bg-light text-secondary py-2">Welcome to our chat application</h3>
+                <div class="modal-header">
+                    <h5 class="modal-title">Enter Your Name</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="username-input" class="form-control" placeholder="Your name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="save-name-btn" class="btn btn-primary">Start Chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="user-list"></div>
+
+    <section class="msger d-none" id="chat-section">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> SimpleChat
+            </div>
+            <div class="msger-header-options">
+                <span><i class="fas fa-cog"></i></span>
+            </div>
+        </header>
+
+        <main class="msger-chat" id="msger-chat-id">
+            <!-- <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://cdn-icons-png.flaticon.com/128/560/560277.png)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOT</div>
+                <div class="msg-info-time">12:45</div>
+              </div>
+      
+              <div class="msg-text">
+                Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
+              </div>
+            </div>
+          </div>
+      
+          <div class="msg right-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://cdn-icons-png.flaticon.com/128/560/560277.png)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">Sajad</div>
+                <div class="msg-info-time">12:46</div>
+              </div>
+      
+              <div class="msg-text">
+                You can change your name in JS section!
+              </div>
+            </div>
+          </div> -->
+        </main>
+
+        <form class="msger-inputarea">
+            <input type="text" class="msger-input" id="msger-input-id" placeholder="Type your message...">
+            <button type="submit" class="msger-send-btn" id="msger-send-btn-id">Send</button>
+        </form>
+    </section>
+</body>
+
+</html>
