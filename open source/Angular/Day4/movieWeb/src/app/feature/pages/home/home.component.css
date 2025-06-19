@@ -1,0 +1,21 @@
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+}
+.rating .star {
+  font-size: 1.2rem;
+}
+.card-title {
+  font-weight: bold;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  border: 1px solid #8b870d; /* Bootstrap warning color */
+  box-shadow: 1px 2px 15px #6d550c;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+

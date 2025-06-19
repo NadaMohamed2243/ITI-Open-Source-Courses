@@ -1,0 +1,41 @@
+<div class="container my-5">
+
+  <h1 class="text-center ">Trending TV</h1>
+  <hr>
+  <!-- Cards Grid Part -->
+  <div class="row g-4">
+    @for (tv of tvs; track tv.id) {
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" [routerLink]="['/details', tv.media_type , tv.id]">
+      <div class="card h-100 shadow-sm">
+        <!-- <img class="card-img-top"
+          [src]="trend.poster_path ? 'https://image.tmdb.org/t/p/w500' + trend.poster_path : 'default-image.jpg'"
+          [alt]="trend.title" /> -->
+
+        <img class="card-img-top" [src]="tv.poster_path | imagePath" [alt]="tv.name" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-truncate" title="{{tv.name}}">{{tv.name}}</h5>
+          <p class="card-text text-muted small overflow-hidden" style="max-height: 80px;">{{tv.genre_ids}}</p>
+          <p class="card-text text-muted small overflow-hidden" style="max-height: 80px;">{{tv.overview}}</p>
+          <div class="mt-auto">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="rating mb-2">
+                <span class="star text-warning">★</span>
+                <span class="ms-1">{{ tv.vote_average.toFixed(1) }}</span>
+              </div>
+              <p class="card-text text-muted small overflow-hidden" style="max-height: 80px;">{{tv.original_name}}</p>
+            </div>
+
+            <hr>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">{{tv.first_air_date}}</small>
+              <small class="text-muted">{{tv.origin_country}}</small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+</div>

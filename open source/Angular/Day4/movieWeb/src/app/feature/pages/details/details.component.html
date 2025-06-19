@@ -1,0 +1,60 @@
+<!-- <div>{{details.backdrop_path}}</div> -->
+@if (details.gender) {
+<div class="person-details">
+  <h1>{{ details.name }}</h1>
+  <p><strong>Known For:</strong> {{ details.known_for_department }}</p>
+  <p><strong>Biography:</strong> {{ details.biography }}</p>
+  <p><strong>Birthday:</strong> {{ details.birthday }}</p>
+  <p><strong>Place of Birth:</strong> {{ details.place_of_birth }}</p>
+  <p><strong>Gender:</strong> {{ details.gender === 1 ? 'Female' : details.gender === 2 ? 'Male' : 'Other' }}</p>
+  <p><strong>IMDb ID:</strong> {{ details.imdb_id }}</p>
+  <p><strong>Popularity:</strong> {{ details.popularity }}</p>
+  <p><strong>Homepage:</strong> <a [href]="details.homepage" target="_blank">{{ details.homepage }}</a></p>
+
+  <h3>Also Known As:</h3>
+  <ul>
+    @for (alias of details.also_known_as; track $index) {
+    <li>{{ alias }}</li>
+    }--
+  </ul>
+
+  <div class="image-container">
+    <img [src]="details.profile_path | imagePath" alt="{{ details.name }}" class="profile-image" />
+  </div>
+</div>
+
+}
+@else {
+<div class="movie-details">
+  <h1>{{ details.title }}</h1>
+  <p><strong>Tagline:</strong> {{ details.tagline }}</p>
+  <p><strong>Status:</strong> {{ details.status }}</p>
+  <p><strong>Overview:</strong> {{ details.overview }}</p>
+  <p><strong>Release Date:</strong> {{ details.release_date }}</p>
+  <p><strong>Runtime:</strong> {{ details.runtime }} minutes</p>
+  <p><strong>Vote Average:</strong> {{ details.vote_average }} ({{ details.vote_count }} votes)</p>
+
+  <h3>Genres:</h3>
+  <ul>
+    @for (genre of details.genres; track $index) {
+    <li>{{ genre.name }}</li>}
+  </ul>
+
+  <h3>Production Companies:</h3>
+  <ul>
+    @for (company of details.production_companies; track $index) {
+    <li>{{ company.name }}</li>
+    }
+  </ul>
+
+  <h3>Spoken Languages:</h3>
+  <ul>
+    @for (language of details.spoken_languages; track $index) {
+    <li>{{ language.name }}</li>}
+  </ul>
+  <div class="image-container">
+    <img [src]="details.poster_path | imagePath" alt="{{ details.title }}" />
+    <img [src]="details.backdrop_path | imagePath" alt="{{ details.title }} backdrop" />
+  </div>
+</div>
+}
